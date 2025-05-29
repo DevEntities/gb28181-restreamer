@@ -92,7 +92,7 @@ class GB28181SIPSender:
                 log.error(f"[SIP-SENDER] Error in sender loop: {e}")
     
     def _send_message(self, message_data):
-        """Send a SIP message using pjsua"""
+        """Send a SIP message using pjsua without registration"""
         # Handle None value for target_uri with default server URI
         target_uri = message_data.get("target_uri")
         if target_uri is None:
@@ -120,39 +120,34 @@ class GB28181SIPSender:
             prefer_tcp = self.config["sip"].get("prefer_tcp", False)
             transport = "tcp" if prefer_tcp else "udp"
             
-            # Build pjsua command to send the message with proper transport
+            # Build pjsua command to send the message WITHOUT REGISTRATION
+            # This prevents creating new connections that trigger VS Code popups
             cmd = [
                 "pjsua",
                 "--id", f"sip:{self.device_id}@{self.server}",
-                "--registrar", f"sip:{self.server}:{self.port}",
                 "--realm", "*",
                 "--username", self.username,
                 "--password", self.password,
-                "--local-port", "0",
-            ]
-            
-            # Add transport parameter
-            if transport == "tcp":
-                cmd.extend(["--use-tcp"])
-            
-            # Complete the command
-            cmd.extend([
+                "--local-port", "0",  # Use random port to avoid conflicts
+                "--no-tcp" if transport == "udp" else "--use-tcp",
                 "--null-audio",
+                "--duration", "5",  # Limit session duration to 5 seconds
+                "--auto-quit",  # Quit automatically after sending
                 "--send-message", target_uri,
                 "--message-content-type", content_type,
                 "--message-content", f"@{temp_path}"
-            ])
+            ]
             
-            log.info(f"[SIP-SENDER] Sending message to {target_uri} using {transport} transport")
+            log.info(f"[SIP-SENDER] Sending message to {target_uri} using {transport} transport (no registration)")
             log.debug(f"[SIP-SENDER] Command: {' '.join(cmd)}")
             
-            # Execute the command
+            # Execute the command with shorter timeout
             result = subprocess.run(
                 cmd,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 universal_newlines=True,
-                timeout=10
+                timeout=8  # Reduced timeout since no registration needed
             )
             
             if result.returncode == 0:

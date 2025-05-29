@@ -371,6 +371,7 @@ def main():
             while running:
                 time.sleep(60)  # Check every minute instead of 30 seconds
                 
+                # DISABLED: Automatic restart logic that was causing connection loops
                 # Check if SIP client is still running
                 if not sip_client or not hasattr(sip_client, 'process') or sip_client.process is None:
                     log.warning("[MAIN] SIP client appears to have stopped")
@@ -385,18 +386,11 @@ def main():
                     else:
                         log.warning("[MAIN] SIP client object is invalid")
                     
-                    # Re-enable automatic restart with longer delay
-                    log.warning("[MAIN] Restarting SIP client after 30 second delay...")
-                    time.sleep(30)  # Wait 30 seconds before restart
-                    
-                    if sip_client:
-                        try:
-                            sip_client.stop()
-                        except:
-                            pass
-                    config["streamer"] = streamer  # Ensure streamer is still connected
-                    sip_client = SIPClient(config)
-                    sip_client.start()
+                    # DISABLED: This automatic restart was causing VS Code popups every few seconds
+                    # Instead, let the user manually restart if needed
+                    log.warning("[MAIN] SIP client stopped. Manual restart required.")
+                    log.warning("[MAIN] To restart: stop the application and run it again.")
+                    break  # Exit the loop instead of restarting automatically
                 
             # Regenerate the device catalog
             if not sip_client:
