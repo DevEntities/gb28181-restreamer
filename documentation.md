@@ -1,436 +1,916 @@
-# GB28181 Restreamer Documentation
+  # GB28181 Restreamer - Complete Documentation
 
-## Table of Contents
-1. [Project Overview](#project-overview)
-2. [System Architecture](#system-architecture)
-3. [Installation Guide](#installation-guide)
-4. [Configuration](#configuration)
-5. [Integration with WVP-GB28181-Pro and ZLMediaKit](#integration-with-wvp-gb28181-pro-and-zlmediakit)
-6. [Usage Guide](#usage-guide)
-7. [Advanced Features](#advanced-features)
-8. [Troubleshooting](#troubleshooting)
-9. [API Reference](#api-reference)
+  ## Overview
 
-## Project Overview
+  GB28181 Restreamer is a comprehensive video streaming solution that implements the GB28181 surveillance standard protocol. It enables streaming of video content from various sources (RTSP streams, video files, or live camera feeds) to GB28181-compatible platforms like WVP-Pro using SIP signaling and RTP streaming.
 
-The GB28181 Restreamer is a lightweight, flexible software solution that enables:
+  ## Key Features
 
-1. **RTSP Stream Restreaming**: Converting RTSP video streams into GB28181-compliant streams
-2. **Video File Streaming**: Scanning directories for video files (.mp4, .avi) and making them available via GB28181
-3. **Multiple Connection Methods**: Supporting both direct SIP connections and local SIP server modes
+  - **GB28181 Protocol Compliance**: Full support for device registration, catalog queries, and media streaming
+  - **Multiple Streaming Modes**: File-based streaming, RTSP source streaming, and real-time frame processing
+  - **Advanced Video Processing**: Appsink/Appsrc pipeline for real-time frame manipulation
+  - **Time Series Recording**: Recording management with historical video playback capabilities
+  - **Flexible Configuration**: JSON-based configuration with multiple preset options
+  - **Robust Health Monitoring**: Automatic stream recovery and health monitoring
+  - **Multi-stream Support**: Handle multiple concurrent video streams
+  - **ARM Architecture Support**: Optimized for ARM64 systems including Raspberry Pi
 
-This software is designed primarily for ARM-based systems like the NVIDIA Jetson Orin NX, making it ideal for embedded video surveillance applications.
+  ## Table of Contents
 
-Key features:
-- Automatic video file discovery and cataloging
-- Robust SIP protocol implementation
-- Efficient GStreamer-based media streaming
-- Automatic recovery from network and connection issues
-- Comprehensive configuration options
+  1. [System Requirements](#system-requirements)
+  2. [Installation](#installation)
+  3. [PJSUA Setup](#pjsua-setup)
+  4. [Configuration](#configuration)
+  5. [Usage](#usage)
+  6. [Advanced Features](#advanced-features)
+  7. [Troubleshooting](#troubleshooting)
+  8. [API Reference](#api-reference)
 
-## System Architecture
+  ## System Requirements
 
-The GB28181 Restreamer follows a modular architecture with these core components:
+  ### Minimum Requirements
+  - **Operating System**: Ubuntu 20.04+, Debian 11+, or Raspberry Pi OS (64-bit)
+  - **Architecture**: x86_64 or ARM64 (aarch64)
+  - **RAM**: 2GB minimum, 4GB recommended
+  - **Storage**: 10GB free space minimum
+  - **Network**: Stable internet connection
+  - **Python**: 3.8 or higher
 
-### Key Components:
+  ### Required System Packages
+  ```bash
+  # Core dependencies
+  sudo apt update
+  sudo apt install -y python3 python3-pip python3-dev
+  sudo apt install -y pkg-config libcairo2-dev gcc python3-dev libgirepository1.0-dev
 
-1. **SIP Client (sip_handler_pjsip.py)**
-   - Handles SIP registration with GB28181 platform
-   - Processes incoming INVITE requests
-   - Manages device catalog and information requests
+  # GStreamer dependencies
+  sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+  sudo apt install -y libgstreamer-plugins-good1.0-dev libgstreamer-plugins-bad1.0-dev
+  sudo apt install -y gstreamer1.0-plugins-base gstreamer1.0-plugins-good
+  sudo apt install -y gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
+  sudo apt install -y gstreamer1.0-libav gstreamer1.0-tools gstreamer1.0-x
 
-2. **Media Streamer (media_streamer.py)**
-   - Creates GStreamer pipelines for video streaming
-   - Manages RTP/SRTP connections
-   - Handles video format conversion and encoding
+  # Additional video processing tools
+  sudo apt install -y ffmpeg v4l-utils
 
-3. **Local SIP Server (local_sip_server.py)**
-   - Optional component for testing/development
-   - Simulates a GB28181 platform for local testing
+  # Development tools (if compiling from source)
+  sudo apt install -y build-essential cmake git
+  ```
 
-4. **XML Message Handling (gb28181_xml.py)**
-   - Formats and parses GB28181-compliant XML messages
-   - Handles catalog, device info requests
+  ## Installation
 
-### Integration Diagram
+  ### Quick Installation
 
-```
-┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
-│                 │      │                 │      │                 │
-│ GB28181         │ SIP  │ WVP-GB28181-Pro │ RTMP │  ZLMediaKit     │
-│ Restreamer      ├──────►                 ├──────►                 │
-│                 │      │                 │      │                 │
-└─────────────────┘      └─────────────────┘      └─────────────────┘
-        │                                                   │
-        │                                                   │
-        │                                                   │
-        │                ┌─────────────────┐                │
-        │                │                 │                │
-        └────────────────► Client Browser  ◄────────────────┘
-                         │                 │
-                         └─────────────────┘
-```
+  1. **Clone the Repository**
+    ```bash
+    git clone https://github.com/your-org/gb28181-restreamer.git
+    cd gb28181-restreamer
+    ```
 
-## Installation Guide
+  2. **Install Python Dependencies**
+    ```bash
+    pip3 install -r requirements.txt
+    ```
 
-### Prerequisites
+  3. **Install PJSUA** (See detailed instructions below)
 
-- Python 3.8 or higher
-- GStreamer 1.0 with required plugins
-- PJSIP/PJSUA for SIP protocol handling
+  4. **Configure the Application**
+    ```bash
+    cp config/config.json config/my_config.json
+    # Edit config/my_config.json with your settings
+    ```
 
-### Installation Steps
+  5. **Run the Application**
+    ```bash
+    python3 src/main.py
+    ```
 
-1. **Install system dependencies**:
+  ## PJSUA Setup
 
-```bash
-sudo apt update
-sudo apt install -y python3 python3-pip python3-dev \
-    gstreamer1.0-tools gstreamer1.0-plugins-base \
-    gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
-    gstreamer1.0-plugins-ugly python3-gi vlc \
-    build-essential pjsip-tools
-```
+  PJSUA is a critical component for SIP communication in GB28181. Follow these detailed instructions based on your system architecture.
 
-2. **Clone the repository**:
+  ### For x86_64 Systems (Intel/AMD)
 
-```bash
-git clone https://github.com/your-organization/gb28181-restreamer.git
-cd gb28181-restreamer
-```
+  #### Option 1: Package Manager Installation (Recommended)
+  ```bash
+  # Ubuntu/Debian
+  sudo apt update
+  sudo apt install -y pjsip-tools
 
-3. **Install Python dependencies**:
+  # Verify installation
+  pjsua --help
+  ```
 
-```bash
-pip3 install -r requirements.txt
-```
+  #### Option 2: Build from Source
+  ```bash
+  # Install dependencies
+  sudo apt install -y build-essential libasound2-dev
 
-4. **Prepare directories**:
+  # Download and compile PJSIP
+  wget https://github.com/pjsip/pjproject/archive/2.14.1.tar.gz
+  tar -xzf 2.14.1.tar.gz
+  cd pjproject-2.14.1
 
-```bash
-mkdir -p logs
-mkdir -p sample_videos
-```
+  # Configure and build
+  ./configure --enable-shared --disable-video --disable-opencore-amr
+  make dep && make
+  sudo make install
+  sudo ldconfig
 
-5. **Verify installation**:
+  # Verify installation
+  pjsua --help
+  ```
 
-```bash
-python3 test_integrated_app.py
-```
+  ### For ARM64 Systems (Raspberry Pi, ARM servers)
 
-## Configuration
+  #### Installing PJSUA on ARM64
 
-The GB28181 Restreamer uses JSON-based configuration files located in the `config` directory.
+  ARM64 systems often require building PJSUA from source due to limited package availability.
 
-### Main Configuration (config/config.json)
+  #### Step 1: System Preparation
+  ```bash
+  # Update system
+  sudo apt update && sudo apt upgrade -y
 
-```json
-{
-  "sip": {
-    "device_id": "34020000001320000001",
-    "username": "34020000001320000001",
-    "password": "12345678",
-    "server": "your-gb28181-server-ip",
-    "port": 5060,
-    "local_port": 5070
-  },
-  "local_sip": {
-    "enabled": true,
-    "port": 5060,
-    "transport": "tcp"
-  },
-  "stream_directory": "./sample_videos",
-  "rtsp_sources": [
-    "rtsp://your-rtsp-server:8554/stream1"
-  ]
-}
-```
+  # Install build dependencies
+  sudo apt install -y build-essential
+  sudo apt install -y libasound2-dev libssl-dev
+  sudo apt install -y autoconf automake libtool
+  sudo apt install -y pkg-config cmake
 
-**Key Configuration Parameters:**
+  # For Raspberry Pi specifically
+  sudo apt install -y libraspberrypi-dev
+  ```
 
-- **SIP Settings**:
-  - `device_id`: GB28181 device ID for this restreamer
-  - `username`/`password`: Authentication credentials for GB28181 platform
-  - `server`/`port`: GB28181 server address and port
-  - `local_port`: Local port for SIP client to use
+  #### Step 2: Download and Build PJSIP
+  ```bash
+  # Create build directory
+  mkdir -p ~/build
+  cd ~/build
 
-- **Local SIP Server**:
-  - `enabled`: Whether to enable the built-in test server
-  - `port`: Port for local SIP server
-  - `transport`: Protocol (tcp/udp) for SIP communication
+  # Download PJSIP source (use stable version)
+  wget https://github.com/pjsip/pjproject/archive/refs/tags/2.14.1.tar.gz
+  tar -xzf 2.14.1.tar.gz
+  cd pjproject-2.14.1
 
-- **Directories and Sources**:
-  - `stream_directory`: Path to directory containing video files
-  - `rtsp_sources`: List of RTSP URLs to restream
+  # Configure for ARM64
+  export CFLAGS="-O2"
+  export CXXFLAGS="-O2"
 
-### Streaming Presets (config/streaming_presets.json)
+  # Configure with ARM optimizations
+  ./configure \
+      --host=aarch64-linux-gnu \
+      --enable-shared \
+      --disable-video \
+      --disable-opencore-amr \
+      --disable-silk \
+      --disable-opus \
+      --disable-speex-codec \
+      --disable-ilbc-codec \
+      --disable-l16-codec \
+      --disable-gsm-codec \
+      --disable-g722-codec \
+      --disable-g7221-codec \
+      --disable-speex-aec \
+      --enable-epoll \
+      --prefix=/usr/local
 
-Configure video quality settings and encoding parameters:
+  # Build (this may take 20-30 minutes on Raspberry Pi)
+  make dep
+  make -j$(nproc)
+  sudo make install
 
-```json
-{
-  "profiles": {
-    "low": {
-      "bitrate": 500000,
-      "width": 640,
-      "height": 360,
-      "framerate": 15
+  # Update library path
+  echo '/usr/local/lib' | sudo tee /etc/ld.so.conf.d/pjsip.conf
+  sudo ldconfig
+
+  # Create symlink for easier access
+  sudo ln -sf /usr/local/bin/pjsua /usr/bin/pjsua
+  ```
+
+  #### Step 3: Verify Installation
+  ```bash
+  # Test PJSUA installation
+  pjsua --help
+
+  # Check library linking
+  ldd /usr/local/bin/pjsua
+  ```
+
+  #### Step 4: Configure for GB28181
+  ```bash
+  # Test SIP registration
+  pjsua --id "sip:test@your-sip-server.com" \
+        --registrar "sip:your-sip-server.com:5060" \
+        --username "test" \
+        --password "password" \
+        --auto-answer 200 \
+        --log-level 4
+  ```
+
+  ### Alternative PJSUA Installation Methods
+
+  #### Using Docker (All Architectures)
+  If compilation fails, you can use Docker:
+
+  ```bash
+  # Create a PJSUA container
+  docker run -it --rm \
+    -v $(pwd):/workspace \
+    --name pjsua-builder \
+    ubuntu:22.04 bash
+
+  # Inside container
+  apt update && apt install -y build-essential wget
+  wget https://github.com/pjsip/pjproject/archive/2.14.1.tar.gz
+  tar -xzf 2.14.1.tar.gz
+  cd pjproject-2.14.1
+  ./configure --enable-shared --disable-video
+  make dep && make
+  cp pjsip-apps/bin/pjsua-* /workspace/pjsua
+  exit
+
+  # Make executable
+  chmod +x pjsua
+  sudo mv pjsua /usr/local/bin/
+  ```
+
+  #### Pre-built ARM64 Binaries
+  ```bash
+  # Download pre-built binary (if available)
+  wget https://github.com/your-org/pjsua-arm64/releases/download/v2.14.1/pjsua-arm64
+  chmod +x pjsua-arm64
+  sudo mv pjsua-arm64 /usr/local/bin/pjsua
+  ```
+
+  ### PJSUA Configuration for GB28181
+
+  Create a PJSUA configuration file for your GB28181 setup:
+
+  ```bash
+  # Create PJSUA config directory
+  mkdir -p ~/.pjsua
+
+  # Create configuration file
+  cat > ~/.pjsua/gb28181.conf << EOF
+  --id sip:YOUR_DEVICE_ID@YOUR_SIP_SERVER:5060
+  --registrar sip:YOUR_SIP_SERVER:5060
+  --username YOUR_DEVICE_ID
+  --password YOUR_PASSWORD
+  --realm *
+  --local-port 5080
+  --auto-answer 200
+  --log-level 4
+  --app-log-level 4
+  --duration 0
+  --null-audio
+  --no-vad
+  EOF
+  ```
+
+  ## Configuration
+
+  ### Basic Configuration
+
+  The main configuration file is `config/config.json`. Here's a complete example:
+
+  ```json
+  {
+    "sip": {
+      "device_id": "81000000465001000001",
+      "username": "81000000465001000001", 
+      "password": "admin123",
+      "server": "your-gb28181-server.com",
+      "port": 5060,
+      "local_port": 5080,
+      "transport": "udp"
     },
-    "medium": {
-      "bitrate": 1000000,
-      "width": 1280,
-      "height": 720,
-      "framerate": 25
+    "local_sip": {
+      "enabled": false,
+      "port": 5060,
+      "transport": "udp"
     },
-    "high": {
-      "bitrate": 2000000,
+    "stream_directory": "/path/to/recordings",
+    "rtsp_sources": [
+      {
+        "id": 1,
+        "name": "Camera 1",
+        "url": "rtsp://192.168.1.100:554/stream1",
+        "username": "admin",
+        "password": "password123"
+      }
+    ],
+    "srtp": {
+      "key": "313233343536373839303132333435363132333435363738393031323334"
+    },
+    "logging": {
+      "level": "INFO",
+      "file": "./logs/gb28181-restreamer.log",
+      "console": true
+    },
+    "pipeline": {
+      "format": "RGB",
       "width": 1920,
       "height": 1080,
-      "framerate": 30
+      "framerate": 25,
+      "buffer_size": 33554432,
+      "queue_size": 3000,
+      "sync": false,
+      "async": false
     }
-  },
-  "default_profile": "medium"
-}
-```
+  }
+  ```
 
-## Integration with WVP-GB28181-Pro and ZLMediaKit
+  ### Configuration Parameters
 
-The GB28181 Restreamer is designed to work seamlessly with WVP-GB28181-Pro and ZLMediaKit, forming a complete video surveillance solution.
+  #### SIP Configuration
+  - **device_id**: Your unique GB28181 device identifier (20 digits)
+  - **username**: SIP username (usually same as device_id)
+  - **password**: SIP password for authentication
+  - **server**: GB28181 platform server address
+  - **port**: SIP server port (usually 5060)
+  - **local_port**: Local SIP port (recommended: 5080)
+  - **transport**: Transport protocol (udp/tcp)
 
-### Setting Up with WVP-GB28181-Pro
+  #### Streaming Configuration
+  - **stream_directory**: Directory for storing/reading video files
+  - **rtsp_sources**: Array of RTSP source configurations
+  - **pipeline**: GStreamer pipeline parameters
 
-1. **Install WVP-GB28181-Pro** according to its documentation.
+  #### Encoding Presets
 
-2. **Configure WVP to accept the GB28181 Restreamer**:
-   - Log into WVP admin interface (typically at http://your-wvp-server:8080/)
-   - Navigate to "设备管理" (Device Management)
-   - Add a new device with the same device ID as configured in the Restreamer
-   - Set the correct username/password credentials
-   - Save the configuration
+  The system includes predefined encoding presets in `config/streaming_presets.json`:
 
-3. **Configure the Restreamer to connect to WVP**:
-   - In your `config.json`, set these parameters:
-     ```json
-     "sip": {
-       "device_id": "34020000001320000001",  // Must match WVP configuration
-       "username": "34020000001320000001",   // Must match WVP configuration
-       "password": "12345678",               // Must match WVP configuration
-       "server": "your-wvp-server-ip",       // WVP server IP address
-       "port": 5060                          // WVP SIP port (usually 5060)
-     }
-     ```
+  ```json
+  {
+    "presets": {
+      "high_quality": {
+        "width": 1920,
+        "height": 1080,
+        "framerate": 25,
+        "bitrate": 4000,
+        "keyframe_interval": 25
+      },
+      "medium_quality": {
+        "width": 1280,
+        "height": 720,
+        "framerate": 15,
+        "bitrate": 2000,
+        "keyframe_interval": 15
+      },
+      "low_bandwidth": {
+        "width": 640,
+        "height": 480,
+        "framerate": 10,
+        "bitrate": 500,
+        "keyframe_interval": 10
+      },
+      "mobile_optimized": {
+        "width": 480,
+        "height": 320,
+        "framerate": 10,
+        "bitrate": 200,
+        "keyframe_interval": 10
+      }
+    }
+  }
+  ```
 
-4. **Verify connection**:
-   - Start the GB28181 Restreamer
-   - Check the restreamer logs for successful registration
-   - In WVP interface, the device should show as "在线" (Online)
-   - You should be able to see the video catalog in WVP
+  ## Usage
 
-### Setting Up with ZLMediaKit
+  ### Basic Streaming
 
-1. **Install and Configure ZLMediaKit** according to its documentation.
+  #### 1. Start the Application
+  ```bash
+  python3 src/main.py
+  ```
 
-2. **Configure WVP to forward streams to ZLMediaKit**:
-   - In WVP configuration (application.yml), set:
-     ```yaml
-     media:
-       zlm-ip: your-zlmediakit-ip
-       zlm-port: 80
-       hook-ip: your-wvp-server-ip
-       hook-port: 8080
-     ```
-   - Restart WVP to apply changes
+  #### 2. File-based Streaming
+  ```python
+  from media_streamer import MediaStreamer
 
-3. **Accessing Video Streams**:
-   - In WVP interface, click on a device channel to start viewing
-   - This triggers a SIP INVITE to the restreamer
-   - The restreamer sends video via RTP to WVP/ZLMediaKit
-   - ZLMediaKit makes the stream available via various protocols:
-     - RTMP: rtmp://your-zlmediakit-ip/live/[stream-id]
-     - HLS: http://your-zlmediakit-ip/live/[stream-id]/hls.m3u8
-     - HTTP-FLV: http://your-zlmediakit-ip/live/[stream-id].flv
+  config = {...}  # Your configuration
+  streamer = MediaStreamer(config)
 
-## Usage Guide
+  # Start streaming a video file
+  success = streamer.start_stream(
+      video_path="/path/to/video.mp4",
+      dest_ip="192.168.1.100", 
+      dest_port=9000,
+      ssrc="1234567890"
+  )
+  ```
 
-### Running the Application
+  #### 3. RTSP Source Streaming
+  Configure RTSP sources in your config file and they will be automatically available as GB28181 channels.
 
-To start the GB28181 Restreamer:
+  ### Advanced Features
 
-```bash
-cd gb28181-restreamer
-python3 src/main.py
-```
+  #### Appsink/Appsrc Frame Processing
 
-The application will:
-1. Load configuration from config/config.json
-2. Scan video files from the configured directory
-4. Start the SIP client and register with the GB28181 platform
+  The system supports real-time frame processing using GStreamer's appsink and appsrc elements:
 
-### Testing with Built-in Tools
+  ```python
+  def custom_frame_processor(frame, timestamp, stream_info):
+      """
+      Custom frame processing function
+      
+      Args:
+          frame (numpy.ndarray): Video frame in RGB format
+          timestamp (float): Frame timestamp
+          stream_info (dict): Stream information
+      
+      Returns:
+          tuple: (processed_frame, timestamp)
+      """
+      # Example: Convert to grayscale
+      gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+      processed = cv2.cvtColor(gray, cv2.COLOR_GRAY2RGB)
+      
+      return processed, timestamp
 
-The project includes testing tools:
+  # Start stream with processing
+  streamer.start_stream_with_processing(
+      video_path="/path/to/video.mp4",
+      dest_ip="192.168.1.100",
+      dest_port=9000,
+      frame_processor_callback=custom_frame_processor
+  )
+  ```
 
-1. **Basic Functionality Test**:
-   ```bash
-   ./test_integrated_app.py
-   ```
+  #### Available Frame Processors
 
-2. **Full GB28181 Protocol Test**:
-   ```bash
-   ./test_gb28181.py
-   ```
+  1. **Grayscale Conversion**
+    ```python
+    def grayscale_processor(frame, timestamp, stream_info):
+        gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+        return cv2.cvtColor(gray, cv2.COLOR_GRAY2RGB), timestamp
+    ```
 
-### Monitoring and Management
+  2. **Edge Detection**
+    ```python
+    def edge_detection_processor(frame, timestamp, stream_info):
+        gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+        edges = cv2.Canny(gray, 100, 200)
+        return cv2.cvtColor(edges, cv2.COLOR_GRAY2RGB), timestamp
+    ```
 
-The application logs detailed information to the console and log files, including:
-- SIP registration status
-- Stream connections and health
-- Error conditions and recovery attempts
+  3. **Text Overlay**
+    ```python
+    def text_overlay_processor(frame, timestamp, stream_info):
+        frame_copy = frame.copy()
+        timestamp_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp))
+        cv2.putText(frame_copy, f"Time: {timestamp_str}", (20, 40), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        return frame_copy, timestamp
+    ```
 
-## Advanced Features
+  #### Testing Appsink/Appsrc Mode
 
-### RTSP Stream Handling
+  Use the provided test script:
 
-The application can connect to RTSP sources and make them available via GB28181:
+  ```bash
+  # Test basic frame processing
+  python3 test_appsink_appsrc.py --video /path/to/test.mp4 --processing grayscale
 
-1. Configure RTSP sources in config.json
-2. The application will automatically connect and monitor these streams
-3. When GB28181 platforms request video, the RTSP stream is transcoded as needed
+  # Test with custom destination
+  python3 test_appsink_appsrc.py --video /path/to/test.mp4 --dest-ip 192.168.1.100 --dest-port 9000
 
-Example configuration:
-```json
-"rtsp_sources": [
-  "rtsp://admin:password@192.168.1.100:554/cam/realmonitor?channel=1&subtype=0",
-  "rtsp://admin:password@192.168.1.101:554/cam/realmonitor?channel=1&subtype=0"
-]
-```
+  # Test edge detection
+  python3 test_appsink_appsrc.py --video /path/to/test.mp4 --processing edge
 
-The system will:
-- Connect to each RTSP source
-- Monitor connection health
-- Automatically retry failed connections
-- Make each stream available as a separate channel in the GB28181 catalog
+  # Test text overlay
+  python3 test_appsink_appsrc.py --video /path/to/test.mp4 --processing text
+  ```
 
-### Fault Tolerance and Recovery
+  #### Time Series Recording and Playback
 
-The system includes comprehensive error handling and recovery:
+  The system supports GB28181 RecordInfo queries for historical video access:
 
-1. **RTSP Connection Issues**: Automatic retry with exponential backoff
-2. **SIP Registration Failures**: Automatic reconnection attempts
-3. **Port Conflicts**: Dynamic port selection to avoid conflicts
-4. **Stream Health Monitoring**: Detection and recovery of failed streams
+  ```python
+  from recording_manager import RecordingManager
 
-## Troubleshooting
+  # Initialize recording manager
+  config = {...}
+  recorder = RecordingManager(config)
 
-### Common Issues
+  # Query recordings by time range
+  recordings = recorder.query_recordings(
+      device_id="81000000465001000001",
+      start_time="20240101T000000Z",
+      end_time="20240131T235959Z",
+      recording_type="all"
+  )
 
-1. **SIP Registration Failures**:
-   - Check network connectivity to SIP server
-   - Verify device_id, username, and password are correct
-   - Ensure the SIP server port is accessible
-   - Check the server logs for authentication errors
+  # Start playback of a specific recording
+  for recording in recordings:
+      streamer.start_recording_playback(
+          recording_info=recording,
+          dest_ip="192.168.1.100",
+          dest_port=9000,
+          start_timestamp=recording["timestamp"],
+          end_timestamp=recording["timestamp"] + recording["duration"]
+      )
+  ```
 
-2. **RTSP Connection Issues**:
-   - Verify RTSP server is running and accessible
-   - Check network connectivity to RTSP server
-   - Ensure RTSP URL is correct in configuration
+  ### Directory Structure for Recordings
 
-3. **Port Conflicts**:
-   - If you see "Address already in use" errors, check for other services using the configured ports
-   - The application will try alternative ports, check logs for "Using alternative port" messages
+  Organize your recordings for optimal time series query performance:
 
-4. **No Streams Visible in WVP**:
-   - Verify SIP registration is successful
-   - Check that video files exist in the configured directory
-   - Ensure the device appears online in WVP
+  ```
+  recordings/
+  ├── 2024-01-01/
+  │   ├── 12-00-00.mp4
+  │   ├── 12-30-00.mp4
+  │   └── 13-00-00.mp4
+  ├── 2024-01-02/
+  │   ├── 09-15-30.mp4
+  │   └── 14-45-00.mp4
+  └── metadata.json
+  ```
 
-### Log Analysis
+  ## Troubleshooting
 
-The application generates detailed logs with different severity levels:
-- INFO: Normal operation information
-- WARNING: Non-critical issues that might need attention
-- ERROR: Problems that prevent functionality
-- DEBUG: Detailed diagnostic information
+  ### Common Issues and Solutions
 
-Example log analysis:
+  #### 1. PJSUA Installation Issues
 
-| Log Message | Interpretation | Action |
-|-------------|----------------|--------|
-| `Registration failed` | SIP registration to server failed | Check credentials and server connection |
-| `RTSP server at x.x.x.x:554 is not available` | Cannot connect to RTSP source | Verify RTSP server is running and URL is correct |
-| `Address already in use` | Port conflict detected | Application will try alternative ports |
+  **Problem**: `Cannot install pjsip-tools / pjsua`
 
-### Checking Stream Status
+  **Solution for ARM64**:
+  ```bash
+  # If package installation fails, build from source
+  sudo apt install -y build-essential libasound2-dev
+  wget https://github.com/pjsip/pjproject/archive/2.14.1.tar.gz
+  tar -xzf 2.14.1.tar.gz
+  cd pjproject-2.14.1
+  ./configure --enable-shared --disable-video
+  make dep && make
+  sudo make install
+  sudo ldconfig
+  ```
 
-To check the status of active streams:
-1. Monitor the application logs for periodic status reports
-2. Check the GB28181 platform for stream status
-3. Use test tools like VLC to verify stream playback
+  **Solution for older Ubuntu/Debian**:
+  ```bash
+  # Add universe repository
+  sudo add-apt-repository universe
+  sudo apt update
+  sudo apt install -y pjsip-tools
+  ```
 
-## API Reference
+  #### 2. GStreamer Issues
 
-### Configuration Structure
+  **Problem**: `Cannot read rtsp stream, Gstreamer error: Internal data stream error`
 
-**config.json**
-- `sip`: SIP client configuration
-- `local_sip`: Local SIP server configuration
-- `stream_directory`: Video file directory
-- `rtsp_sources`: List of RTSP sources
+  **Solutions**:
 
-### XML Message Formats
+  1. **Install additional GStreamer plugins**:
+    ```bash
+    sudo apt install -y gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
+    sudo apt install -y gstreamer1.0-libav
+    ```
 
-The application follows the GB28181 standard for XML messages:
+  2. **Check RTSP source compatibility**:
+    ```bash
+    # Test RTSP stream directly
+    gst-launch-1.0 rtspsrc location="rtsp://your-camera-ip:554/stream" ! decodebin ! videoconvert ! autovideosink
+    ```
 
-**Catalog Response**:
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-    <CmdType>Catalog</CmdType>
-    <SN>123456</SN>
-    <DeviceID>[DEVICE_ID]</DeviceID>
-    <Result>OK</Result>
-    <DeviceList Num="[NUMBER_OF_DEVICES]">
-        <Item>
-            <DeviceID>[CHANNEL_ID]</DeviceID>
-            <Name>[CHANNEL_NAME]</Name>
-            <Manufacturer>GB28181-Restreamer</Manufacturer>
-            <Model>Video-File</Model>
-            <Owner>gb28181-restreamer</Owner>
-            <CivilCode>123456</CivilCode>
-            <Address>[CHANNEL_ADDRESS]</Address>
-            <Parental>0</Parental>
-            <SafetyWay>0</SafetyWay>
-            <RegisterWay>1</RegisterWay>
-            <Secrecy>0</Secrecy>
-            <Status>ON</Status>
-        </Item>
-        <!-- More items -->
-    </DeviceList>
-</Response>
-```
+  3. **Update pipeline configuration**:
+    ```json
+    {
+      "pipeline": {
+        "format": "RGB",
+        "width": 640,
+        "height": 480,
+        "framerate": 15,
+        "buffer_size": 16777216,
+        "sync": false
+      }
+    }
+    ```
 
-**Device Info Response**:
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-    <CmdType>DeviceInfo</CmdType>
-    <SN>123456</SN>
-    <DeviceID>[DEVICE_ID]</DeviceID>
-    <Result>OK</Result>
-    <DeviceName>GB28181-Restreamer</DeviceName>
-    <Manufacturer>GB28181-RestreamerProject</Manufacturer>
-    <Model>Restreamer-1.0</Model>
-    <Firmware>1.0.0</Firmware>
-    <MaxCamera>[NUMBER_OF_CHANNELS]</MaxCamera>
-    <MaxAlarm>0</MaxAlarm>
-</Response>
-```
+  #### 3. ARM Architecture Issues
 
-### Key Module Functions
+  **Problem**: `RTSP server doesn't work on ARM (rtsp-simple-server is amd64)`
 
-**sip_handler_pjsip.py**:
-- `handle_invite(msg_text)`: Process incoming INVITE requests
-- `parse_sdp_and_stream(sdp_text, callid, target_channel)`: Process SDP and start streaming
+  **Solution - Use MediaMTX (ARM64 compatible)**:
+  ```bash
+  # Download ARM64 version of MediaMTX (successor to rtsp-simple-server)
+  wget https://github.com/bluenviron/mediamtx/releases/download/v1.5.0/mediamtx_v1.5.0_linux_arm64v8.tar.gz
+  tar -xzf mediamtx_v1.5.0_linux_arm64v8.tar.gz
+  chmod +x mediamtx
 
-**gb28181_xml.py**:
-- `format_catalog_response(device_id, device_catalog)`: Generate catalog XML 
+  # Create configuration
+  cat > mediamtx.yml << EOF
+  rtspAddress: :8554
+  rtmpAddress: :1935
+  webrtcAddress: :8889
+  api: yes
+  apiAddress: :9997
+  paths:
+    all:
+      source: publisher
+  EOF
+
+  # Run MediaMTX
+  ./mediamtx mediamtx.yml
+  ```
+
+  **Alternative - Use GStreamer RTSP Server**:
+  ```bash
+  # Install GStreamer RTSP server
+  sudo apt install -y libgstrtspserver-1.0-dev
+
+  # Use python gst-rtsp-server for ARM
+  pip3 install gst-rtsp-server
+  ```
+
+  #### 4. Registration Issues
+
+  **Problem**: `WVP-pro device registration issues`
+
+  **Solutions**:
+
+  1. **Check SIP configuration**:
+    ```bash
+    # Test SIP registration manually
+    pjsua --id "sip:YOUR_DEVICE_ID@YOUR_SERVER:5060" \
+          --registrar "sip:YOUR_SERVER:5060" \
+          --username "YOUR_DEVICE_ID" \
+          --password "YOUR_PASSWORD" \
+          --duration 30
+    ```
+
+  2. **Verify network connectivity**:
+    ```bash
+    # Check if SIP server is reachable
+    telnet YOUR_SERVER 5060
+    
+    # Check UDP connectivity
+    nc -u YOUR_SERVER 5060
+    ```
+
+  3. **Check device ID format**:
+    - Must be exactly 20 digits
+    - First 8 digits: Administrative region code
+    - Next 2 digits: Device type (01 for camera)
+    - Last 10 digits: Device serial number
+
+  #### 5. Video Catalog Issues
+
+  **Problem**: `Videos not showing in WVP catalog`
+
+  **Solutions**:
+
+  1. **Verify catalog response**:
+    ```bash
+    # Check if catalog XML is generated
+    ls -la catalog_response.xml
+    cat catalog_response.xml
+    ```
+
+  2. **Check channel configuration**:
+    ```python
+    # Ensure channels are properly configured
+    {
+      "rtsp_sources": [
+        {
+          "id": 1,
+          "name": "Camera 1",
+          "url": "rtsp://192.168.1.100:554/stream1"
+        }
+      ]
+    }
+    ```
+
+  #### 6. Performance Issues on ARM
+
+  **Problem**: High CPU usage or poor performance on ARM devices
+
+  **Solutions**:
+
+  1. **Optimize encoding settings**:
+    ```json
+    {
+      "pipeline": {
+        "width": 640,
+        "height": 480,
+        "framerate": 15,
+        "bitrate": 1000
+      }
+    }
+    ```
+
+  2. **Enable hardware acceleration** (Raspberry Pi):
+    ```bash
+    # Enable GPU memory split
+    sudo raspi-config
+    # Advanced Options -> Memory Split -> 128
+    
+    # Use hardware encoder
+    export GST_DEBUG=3
+    gst-inspect-1.0 | grep omx
+    ```
+
+  3. **Use lower quality presets**:
+    ```python
+    encoder_params = {
+        "width": 480,
+        "height": 320,
+        "framerate": 10,
+        "bitrate": 200
+    }
+    ```
+
+  ### Debugging and Logging
+
+  #### Enable Debug Logging
+
+  ```python
+  # In your configuration
+  {
+    "logging": {
+      "level": "DEBUG",
+      "file": "./logs/debug.log",
+      "console": true
+    }
+  }
+  ```
+
+  #### GStreamer Debug
+
+  ```bash
+  # Set GStreamer debug level
+  export GST_DEBUG=3
+
+  # Debug specific elements
+  export GST_DEBUG=rtspsrc:5,rtpbin:5
+
+  # Run with debug
+  python3 src/main.py
+  ```
+
+  #### PJSUA Debug
+
+  ```bash
+  # Run with verbose logging
+  pjsua --log-level 5 --app-log-level 5 --log-file pjsua_debug.log
+  ```
+
+  #### Network Debugging
+
+  ```bash
+  # Monitor SIP traffic
+  sudo tcpdump -i any -n port 5060 -A
+
+  # Monitor RTP traffic  
+  sudo tcpdump -i any -n portrange 10000-20000
+
+  # Check port usage
+  sudo netstat -tulpn | grep python3
+  ```
+
+  ## API Reference
+
+  ### MediaStreamer Class
+
+  #### Methods
+
+  ##### `start_stream(video_path, dest_ip, dest_port, ssrc=None, encoder_params=None)`
+  Start streaming a video file.
+
+  **Parameters**:
+  - `video_path` (str): Path to video file
+  - `dest_ip` (str): Destination IP address  
+  - `dest_port` (int): Destination port
+  - `ssrc` (str, optional): RTP SSRC identifier
+  - `encoder_params` (dict, optional): Encoding parameters
+
+  **Returns**: `bool` - Success status
+
+  ##### `start_stream_with_processing(video_path, dest_ip, dest_port, frame_processor_callback=None, ssrc=None, encoder_params=None)`
+  Start streaming with real-time frame processing.
+
+  **Parameters**:
+  - `frame_processor_callback` (function): Frame processing function
+  - Other parameters same as `start_stream`
+
+  **Returns**: `bool` - Success status
+
+  ##### `stop_stream(stream_id=None)`
+  Stop a specific stream or all streams.
+
+  **Parameters**:
+  - `stream_id` (str, optional): Stream identifier
+
+  ##### `get_stream_status(stream_id=None)`
+  Get status of streams.
+
+  **Returns**: `dict` - Stream status information
+
+  ### RecordingManager Class
+
+  #### Methods
+
+  ##### `query_recordings(device_id, start_time, end_time, recording_type=None, secrecy=None, max_results=100)`
+  Query recordings by time range.
+
+  **Parameters**:
+  - `device_id` (str): Device identifier
+  - `start_time` (str): Start time (ISO format or GB28181 format)
+  - `end_time` (str): End time
+  - `recording_type` (str, optional): Recording type filter
+  - `secrecy` (str, optional): Secrecy level filter
+  - `max_results` (int): Maximum results to return
+
+  **Returns**: `list` - List of recording metadata
+
+  ##### `get_recording_stream_uri(recording_id)`
+  Get streaming URI for a recording.
+
+  **Parameters**:
+  - `recording_id` (str): Recording identifier
+
+  **Returns**: `str` - Streaming URI
+
+  ## Performance Optimization
+
+  ### For ARM Devices
+
+  1. **Use appropriate quality settings**:
+    ```json
+    {
+      "pipeline": {
+        "width": 640,
+        "height": 480,
+        "framerate": 15,
+        "bitrate": 1000
+      }
+    }
+    ```
+
+  2. **Enable hardware acceleration** (when available):
+    ```bash
+    # Check for hardware encoders
+    gst-inspect-1.0 | grep -i "h264\|h265"
+    ```
+
+  3. **Optimize buffer sizes**:
+    ```json
+    {
+      "pipeline": {
+        "buffer_size": 16777216,
+        "queue_size": 1000
+      }
+    }
+    ```
+
+  ### Memory Management
+
+  - Monitor memory usage: `htop` or `free -h`
+  - Limit concurrent streams on low-memory devices
+  - Use appropriate buffer sizes for your hardware
+
+  ### Network Optimization
+
+  - Use UDP transport for better performance
+  - Configure appropriate RTP port ranges
+  - Monitor network bandwidth usage
+
+  ## Support and Contributing
+
+  ### Getting Help
+
+  1. Check the troubleshooting section above
+  2. Review log files in `./logs/`
+  3. Enable debug logging for detailed diagnostics
+  4. Check GStreamer installation: `gst-inspect-1.0 --version`
+
+  ### Contributing
+
+  1. Fork the repository
+  2. Create a feature branch
+  3. Make your changes
+  4. Test on both x86_64 and ARM64 architectures
+  5. Submit a pull request
+
+  ### Reporting Issues
+
+  When reporting issues, please include:
+  - System architecture (`uname -a`)
+  - Python version (`python3 --version`)
+  - GStreamer version (`gst-inspect-1.0 --version`)
+  - PJSUA version (`pjsua --version`)
+  - Complete error logs
+  - Configuration file (with sensitive data removed)
+
+  ## License
+
+  This project is licensed under the MIT License. See LICENSE file for details.
+
+  ---
+
+  **Last Updated**: December 2024
+  **Version**: 2.0.0
+  **Compatible Architectures**: x86_64, ARM64 

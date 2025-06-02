@@ -95,6 +95,12 @@ def periodic_status_check():
     
     log.info("[STATUS] Starting periodic status monitoring")
     
+    # Get recording manager reference
+    try:
+        recording_manager = get_recording_manager(None)  # Get existing instance
+    except:
+        recording_manager = None
+    
     while running:
         try:
             # Check active streams
@@ -114,6 +120,17 @@ def periodic_status_check():
                 for url, status in rtsp_status.items():
                     health = status.get("health", "unknown")
                     log.info(f"[STATUS] RTSP {url}: {health}")
+            
+            # Check recording manager status
+            if recording_manager:
+                try:
+                    scan_status = recording_manager.get_scan_status()
+                    if scan_status['scanning']:
+                        log.info(f"[STATUS] Recording scan in progress: {scan_status['files_cached']} files found")
+                    elif scan_status['scan_complete']:
+                        log.info(f"[STATUS] Recording scan complete: {scan_status['files_cached']} files cached")
+                except Exception as e:
+                    log.debug(f"[STATUS] Could not get recording status: {e}")
             
             # Sleep for 60 seconds before next check
             for _ in range(60):
@@ -310,9 +327,13 @@ def main():
         # Initialize recording manager
         recording_manager = get_recording_manager(config)
         if recording_manager:
-            # Scan for recordings
-            recording_manager.scan_recordings(force=True)
-            log.info("[RECORD] Recording manager initialized")
+            # Start async scan for recordings (don't wait for completion)
+            log.info("[RECORD] Recording manager initialized with async scanning")
+            # Log scan status
+            status = recording_manager.get_scan_status()
+            log.info(f"[RECORD] Scan status: {status['files_cached']} files cached, scanning={status['scanning']}")
+        else:
+            log.warning("[RECORD] Recording manager not available")
         
         # Start RTSP sources
         run_rtsp_sources(config.get("rtsp_sources", []))
