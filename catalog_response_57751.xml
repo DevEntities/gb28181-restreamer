@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GB2312"?>
+<Notify>
+<CmdType>Keepalive</CmdType>
+<SN>57751</SN>
+<DeviceID>81000000465001000001</DeviceID>
+<Status>OK</Status>
+<Info>
+<DeviceID>81000000465001000001</DeviceID>
+<Time>2025-06-04T17:22:31</Time>
+</Info>
+</Notify>

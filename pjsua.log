@@ -1,118 +1,156 @@
-02:54:51.764         sip_endpoint.c !.Module "mod-pjsua-log" registered
-02:54:51.764         sip_endpoint.c  .Module "mod-tsx-layer" registered
-02:54:51.764         sip_endpoint.c  .Module "mod-stateful-util" registered
-02:54:51.764         sip_endpoint.c  .Module "mod-ua" registered
-02:54:51.764         sip_endpoint.c  .Module "mod-100rel" registered
-02:54:51.764         sip_endpoint.c  .Module "mod-pjsua" registered
-02:54:51.764         sip_endpoint.c  .Module "mod-invite" registered
-02:54:51.764                  pjlib  ..select() I/O Queue created (0x6478931ea7f8)
-02:54:51.771         sip_endpoint.c  .Module "mod-evsub" registered
-02:54:51.771         sip_endpoint.c  .Module "mod-presence" registered
-02:54:51.771         sip_endpoint.c  .Module "mod-dlg_even" registered
-02:54:51.771         sip_endpoint.c  .Module "mod-mwi" registered
-02:54:51.771         sip_endpoint.c  .Module "mod-refer" registered
-02:54:51.771         sip_endpoint.c  .Module "mod-pjsua-pres" registered
-02:54:51.771         sip_endpoint.c  .Module "mod-pjsua-im" registered
-02:54:51.771         sip_endpoint.c  .Module "mod-pjsua-options" registered
-02:54:51.771           pjsua_core.c  .4 SIP worker threads created
-02:54:51.771           pjsua_core.c  .pjsua version 2.15-dev for Linux-6.8.4.4/x86_64/glibc-2.39 initialized
-02:54:51.771           pjsua_core.c  .PJSUA state changed: CREATED --> INIT
-02:54:51.771         sip_endpoint.c  Module "mod-default-handler" registered
-02:54:51.771           conference.c  .Add port 1 (ringback) queued
-02:54:51.771           conference.c  .Add port 2 (ring) queued
-02:54:51.771           pjsua_core.c  SIP UDP socket reachable at 172.31.7.94:5080
-02:54:51.771      udp0x647893248790  SIP UDP transport started, published address is 172.31.7.94:5080
-02:54:51.772            pjsua_acc.c  Adding account: id=<sip:172.31.7.94:5080>
-02:54:51.772            pjsua_acc.c  .Account <sip:172.31.7.94:5080> added with id 0
-02:54:51.772            pjsua_acc.c  Modifying account 0
-02:54:51.772            pjsua_acc.c  Acc 0: setting online status to 1..
-02:54:51.772            pjsua_acc.c  Adding account: id=sip:81000000465001000001@ai-sip.x-stage.bull-b.com
-02:54:51.772            pjsua_acc.c  .Account sip:81000000465001000001@ai-sip.x-stage.bull-b.com added with id 1
-02:54:51.772            pjsua_acc.c  .Acc 1: setting registration..
-02:54:51.772            pjsua_acc.c  ..Contact for acc 1 updated: <sip:81000000465001000001@172.31.7.94:5080;ob>
-02:54:51.772           pjsua_core.c  ...TX 646 bytes Request msg REGISTER/cseq=54434 (tdta0x64789324e2b0) to UDP 203.142.93.131:5060:
+18:17:46.047         sip_endpoint.c !.Module "mod-pjsua-log" registered
+18:17:46.047         sip_endpoint.c  .Module "mod-tsx-layer" registered
+18:17:46.047         sip_endpoint.c  .Module "mod-stateful-util" registered
+18:17:46.047         sip_endpoint.c  .Module "mod-ua" registered
+18:17:46.047         sip_endpoint.c  .Module "mod-100rel" registered
+18:17:46.047         sip_endpoint.c  .Module "mod-pjsua" registered
+18:17:46.047         sip_endpoint.c  .Module "mod-invite" registered
+18:17:46.048                  pjlib  ..select() I/O Queue created (0x5806a1b827f8)
+18:17:46.054         sip_endpoint.c  .Module "mod-evsub" registered
+18:17:46.054         sip_endpoint.c  .Module "mod-presence" registered
+18:17:46.054         sip_endpoint.c  .Module "mod-dlg_even" registered
+18:17:46.054         sip_endpoint.c  .Module "mod-mwi" registered
+18:17:46.054         sip_endpoint.c  .Module "mod-refer" registered
+18:17:46.054         sip_endpoint.c  .Module "mod-pjsua-pres" registered
+18:17:46.054         sip_endpoint.c  .Module "mod-pjsua-im" registered
+18:17:46.054         sip_endpoint.c  .Module "mod-pjsua-options" registered
+18:17:46.054           pjsua_core.c  .4 SIP worker threads created
+18:17:46.054           pjsua_core.c  .pjsua version 2.15-dev for Linux-6.8.4.4/x86_64/glibc-2.39 initialized
+18:17:46.054           pjsua_core.c  .PJSUA state changed: CREATED --> INIT
+18:17:46.054         sip_endpoint.c  Module "mod-default-handler" registered
+18:17:46.054           conference.c  .Add port 1 (ringback) queued
+18:17:46.054           conference.c  .Add port 2 (ring) queued
+18:17:46.054           pjsua_core.c  SIP UDP socket reachable at 172.31.7.94:5080
+18:17:46.054      udp0x5806a1be0790  SIP UDP transport started, published address is 172.31.7.94:5080
+18:17:46.054            pjsua_acc.c  Adding account: id=<sip:172.31.7.94:5080>
+18:17:46.054            pjsua_acc.c  .Account <sip:172.31.7.94:5080> added with id 0
+18:17:46.054            pjsua_acc.c  Modifying account 0
+18:17:46.054            pjsua_acc.c  Acc 0: setting online status to 1..
+18:17:46.054            pjsua_acc.c  Adding account: id=sip:81000000465001000001@ai-sip.x-stage.bull-b.com
+18:17:46.054            pjsua_acc.c  .Account sip:81000000465001000001@ai-sip.x-stage.bull-b.com added with id 1
+18:17:46.054            pjsua_acc.c  .Acc 1: setting registration..
+18:17:46.054            pjsua_acc.c  ..Contact for acc 1 updated: <sip:81000000465001000001@172.31.7.94:5080;ob>
+18:17:46.055           pjsua_core.c  ...TX 645 bytes Request msg REGISTER/cseq=27604 (tdta0x5806a1be62b0) to UDP 203.142.93.131:5060:
 REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
-Via: SIP/2.0/UDP 172.31.7.94:5080;rport;branch=z9hG4bKPj79a4e2bd-f02d-49bb-8d38-20fb787d1223
+Via: SIP/2.0/UDP 172.31.7.94:5080;rport;branch=z9hG4bKPj69a13e8b-9bb5-43d1-99d0-a5d1ce1f6a51
 Max-Forwards: 70
-From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=a820961e-e56b-485e-82f9-c470af8d1967
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=69a30235-61e8-456b-84ec-614444373f1e
 To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
-Call-ID: aba8139a-e5bb-413c-a0f9-29f064ad9ea7
-CSeq: 54434 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27604 REGISTER
 User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
 Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
-Expires: 3600
+Expires: 120
 Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
 Content-Length:  0
 
 
 --end msg--
-02:54:51.772            pjsua_acc.c  ..Acc 1: Registration sent
-02:54:51.772            pjsua_acc.c  Acc 1: setting online status to 1..
-02:54:51.772            pjsua_aud.c  Setting null sound device..
-02:54:51.772            pjsua_app.c  .Turning sound device -99 -99 ON
-02:54:51.772            pjsua_aud.c  .Opening null sound device..
-02:54:51.772           pjsua_core.c  PJSUA state changed: INIT --> STARTING
-02:54:51.772         sip_endpoint.c  .Module "mod-unsolicited-mwi" registered
-02:54:51.772           pjsua_core.c  .PJSUA state changed: STARTING --> RUNNING
-02:54:51.772                 main.c  Ready: Success
-02:54:51.791           conference.c !.Added port 1 (ringback), port count=2
-02:54:51.791           conference.c  .Added port 2 (ring), port count=3
-02:54:52.005           pjsua_core.c !.RX 528 bytes Response msg 401/REGISTER/cseq=54434 (rdata0x64789324a218) from UDP 203.142.93.131:5060:
+18:17:46.055            pjsua_acc.c  ..Acc 1: Registration sent
+18:17:46.055            pjsua_acc.c  Acc 1: setting online status to 1..
+18:17:46.055            pjsua_aud.c  Setting null sound device..
+18:17:46.055            pjsua_app.c  .Turning sound device -99 -99 ON
+18:17:46.055            pjsua_aud.c  .Opening null sound device..
+18:17:46.055           pjsua_core.c  PJSUA state changed: INIT --> STARTING
+18:17:46.055         sip_endpoint.c  .Module "mod-unsolicited-mwi" registered
+18:17:46.055           pjsua_core.c  .PJSUA state changed: STARTING --> RUNNING
+18:17:46.055                 main.c  Ready: Success
+18:17:46.074           conference.c !.Added port 1 (ringback), port count=2
+18:17:46.074           conference.c  .Added port 2 (ring), port count=3
+18:17:46.448           pjsua_core.c !.RX 528 bytes Response msg 401/REGISTER/cseq=27604 (rdata0x5806a1be2218) from UDP 203.142.93.131:5060:
 SIP/2.0 401 Unauthorized
-CSeq: 54434 REGISTER
-Call-ID: aba8139a-e5bb-413c-a0f9-29f064ad9ea7
-From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=a820961e-e56b-485e-82f9-c470af8d1967
+CSeq: 27604 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=69a30235-61e8-456b-84ec-614444373f1e
 To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
-Via: SIP/2.0/UDP 172.31.7.94:5080;rport=5080;branch=z9hG4bKPj79a4e2bd-f02d-49bb-8d38-20fb787d1223;received=13.50.108.195
-WWW-Authenticate: Digest realm="81000000",qop="auth",nonce="7b81cc69b3bfb924f46d792208d32f8f",algorithm=MD5
+Via: SIP/2.0/UDP 172.31.7.94:5080;rport=5080;branch=z9hG4bKPj69a13e8b-9bb5-43d1-99d0-a5d1ce1f6a51;received=13.50.108.195
+WWW-Authenticate: Digest realm="81000000",qop="auth",nonce="96bb44ac9ea26ebb3b4ad62e14993c97",algorithm=MD5
 User-Agent: WVP-Pro 
 Content-Length: 0
 
 
 --end msg--
-02:54:52.005           pjsua_core.c  ....TX 931 bytes Request msg REGISTER/cseq=54435 (tdta0x64789324e2b0) to UDP 203.142.93.131:5060:
+18:17:46.448           pjsua_core.c  ....TX 930 bytes Request msg REGISTER/cseq=27605 (tdta0x5806a1be62b0) to UDP 203.142.93.131:5060:
 REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
-Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPj5732238d-53f5-4345-95b8-d92f54b67aea
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjd03a246a-75fb-4f2c-bea5-c02bf73ea683
 Max-Forwards: 70
-From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=a820961e-e56b-485e-82f9-c470af8d1967
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=69a30235-61e8-456b-84ec-614444373f1e
 To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
-Call-ID: aba8139a-e5bb-413c-a0f9-29f064ad9ea7
-CSeq: 54435 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27605 REGISTER
 User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
 Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
-Expires: 3600
+Expires: 120
 Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
-Authorization: Digest username="81000000465001000001", realm="81000000", nonce="7b81cc69b3bfb924f46d792208d32f8f", uri="sip:ai-sip.x-stage.bull-b.com:5060", response="dd64b158d1a15e8db649d043549643cf", algorithm=MD5, cnonce="ca041301608a4c7fada5f897c844e442", qop=auth, nc=00000001
+Authorization: Digest username="81000000465001000001", realm="81000000", nonce="96bb44ac9ea26ebb3b4ad62e14993c97", uri="sip:ai-sip.x-stage.bull-b.com:5060", response="cf4a054b049a33ff803711c8e1722e2a", algorithm=MD5, cnonce="b093b401933e4fcaa3240d0d6456d11a", qop=auth, nc=00000001
 Content-Length:  0
 
 
 --end msg--
-02:54:52.234           pjsua_core.c  .RX 514 bytes Response msg 200/REGISTER/cseq=54435 (rdata0x7e8b24001d78) from UDP 203.142.93.131:5060:
+18:17:46.854           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27605 (rdata0x710bfc001d78) from UDP 203.142.93.131:5060:
 SIP/2.0 200 OK
-CSeq: 54435 REGISTER
-Call-ID: aba8139a-e5bb-413c-a0f9-29f064ad9ea7
-From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=a820961e-e56b-485e-82f9-c470af8d1967
+CSeq: 27605 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=69a30235-61e8-456b-84ec-614444373f1e
 To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
-Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPj5732238d-53f5-4345-95b8-d92f54b67aea;received=13.50.108.195
-Date: 2025-06-04T10:54:52.120
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPjd03a246a-75fb-4f2c-bea5-c02bf73ea683;received=13.50.108.195
+Date: 2025-06-05T02:17:46.742
 Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
-Expires: 3600
+Expires: 120
 User-Agent: WVP-Pro 
 Content-Length: 0
 
 
 --end msg--
-02:54:52.234            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
-02:54:52.234            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
-02:54:52.234            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 3600 seconds
-02:54:52.234            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:12s
-02:54:52.336           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=415 (rdata0x7e8b24001d78) from UDP 203.142.93.131:5060:
+18:17:46.854            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:17:46.854            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:17:46.854            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:17:46.854            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:14s
+18:17:47.055            pjsua_aud.c  Closing sound device after idle for 1 second(s)
+18:17:47.055            pjsua_app.c  .Turning sound device -99 -99 OFF
+18:17:47.055            pjsua_aud.c  .Closing null sound device..
+18:19:41.854           pjsua_core.c !.TX 647 bytes Request msg REGISTER/cseq=27606 (tdta0x710bf8000c20) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPj52c82a98-1f25-405a-a74d-afb820129109
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=87d8c931-acfd-4747-b86d-0b31e62da2c0
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27606 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:19:42.103           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27606 (rdata0x710bf4000b98) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27606 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=87d8c931-acfd-4747-b86d-0b31e62da2c0
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPj52c82a98-1f25-405a-a74d-afb820129109;received=13.50.108.195
+Date: 2025-06-05T02:19:41.990
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:19:42.103            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:19:42.103            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:19:42.103            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:19:42.103            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:13s
+18:19:42.190           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=534 (rdata0x710bf4000b98) from UDP 203.142.93.131:5060:
 MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
-Call-ID: ef38678671b22fa38deaf990a3e64534@0.0.0.0
-CSeq: 415 MESSAGE
-From: <sip:81000000462001888888@81000000>;tag=c48b1034faca4503a402904d303e7482
+Call-ID: cb989dd57b995b48b82095b715dd859c@0.0.0.0
+CSeq: 534 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=96656051e02a4cff9557f00f87d27209
 To: <sip:81000000465001000001@13.50.108.195:5080>
-Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK2037870804;rport
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK1761849362;rport
 Max-Forwards: 70
 User-Agent: WVP-Pro 
 Content-Type: Application/MANSCDP+xml
@@ -121,20 +159,1331 @@ Content-Length: 154
 <?xml version="1.0" encoding="GB2312"?>
 <Query>
   <CmdType>Catalog</CmdType>
-  <SN>368226</SN>
+  <SN>916542</SN>
   <DeviceID>81000000465001000001</DeviceID>
 </Query>
 
 --end msg--
-02:54:52.336           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=415 (tdta0x7e8b1c000c20) to UDP 203.142.93.131:5060:
+18:19:42.190           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=534 (tdta0x710bfc001e00) to UDP 203.142.93.131:5060:
 SIP/2.0 200 OK
-Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK2037870804
-Call-ID: ef38678671b22fa38deaf990a3e64534@0.0.0.0
-From: <sip:81000000462001888888@81000000>;tag=c48b1034faca4503a402904d303e7482
-To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK2037870804
-CSeq: 415 MESSAGE
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK1761849362
+Call-ID: cb989dd57b995b48b82095b715dd859c@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=96656051e02a4cff9557f00f87d27209
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK1761849362
+CSeq: 534 MESSAGE
 Content-Length:  0
 
 
 --end msg--
-02:54:52.336            pjsua_app.c  .MESSAG
+18:19:42.190            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>916542</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:21:37.111           pjsua_core.c !.TX 647 bytes Request msg REGISTER/cseq=27607 (tdta0x710bec000c20) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPja74d2432-178c-4ae2-a356-19a2c74a9efc
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=c4dc8d7a-3e8e-4472-8e63-e40194527787
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27607 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:21:37.429           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27607 (rdata0x710bfc0050f8) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27607 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=c4dc8d7a-3e8e-4472-8e63-e40194527787
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPja74d2432-178c-4ae2-a356-19a2c74a9efc;received=13.50.108.195
+Date: 2025-06-05T02:21:37.315
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:21:37.429            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:21:37.429            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:21:37.429            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:21:37.429            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:13s
+18:21:39.478           pjsua_core.c  .RX 580 bytes Request msg MESSAGE/cseq=535 (rdata0x710bf4000b98) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: fa73225630fda7bd1d4fbf5a8446fade@0.0.0.0
+CSeq: 535 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=d3e52ceba1964f999ea669d17b8fd9c0
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK9305004547;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>699800</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:21:39.478           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=535 (tdta0x710bf4002b70) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK9305004547
+Call-ID: fa73225630fda7bd1d4fbf5a8446fade@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=d3e52ceba1964f999ea669d17b8fd9c0
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK9305004547
+CSeq: 535 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:21:39.478            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>699800</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:23:32.431           pjsua_core.c  .TX 647 bytes Request msg REGISTER/cseq=27608 (tdta0x710bf4002b70) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjcbdbfc9d-c1c9-4ba4-9ac1-bc36924bbec2
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=7a6231e7-fb15-4e76-b083-3a94270e21ac
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27608 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:23:32.685           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27608 (rdata0x710bf4000b98) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27608 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=7a6231e7-fb15-4e76-b083-3a94270e21ac
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPjcbdbfc9d-c1c9-4ba4-9ac1-bc36924bbec2;received=13.50.108.195
+Date: 2025-06-05T02:23:32.569
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:23:32.685            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:23:32.685            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:23:32.685            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:23:32.685            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:13s
+18:23:32.986           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=536 (rdata0x710bf8000b98) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: 698bd8f8446f7328966610f492de8cb2@0.0.0.0
+CSeq: 536 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=77f133c452274ff693ab0bb6b76a82fb
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK8603904352;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>197320</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:23:32.986           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=536 (tdta0x710bfc001e00) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK8603904352
+Call-ID: 698bd8f8446f7328966610f492de8cb2@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=77f133c452274ff693ab0bb6b76a82fb
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK8603904352
+CSeq: 536 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:23:32.986            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>197320</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:25:27.685           pjsua_core.c  .TX 647 bytes Request msg REGISTER/cseq=27609 (tdta0x710bfc001e00) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjc945c650-9b47-429a-aeeb-35861afdabc5
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=ca40d1c9-3559-473b-9e71-be7bc8209b47
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27609 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:25:27.966           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27609 (rdata0x710bfc0050f8) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27609 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=ca40d1c9-3559-473b-9e71-be7bc8209b47
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPjc945c650-9b47-429a-aeeb-35861afdabc5;received=13.50.108.195
+Date: 2025-06-05T02:25:27.857
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:25:27.966            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:25:27.966            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:25:27.966            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:25:27.966            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:13s
+18:25:31.824           pjsua_core.c  .RX 580 bytes Request msg MESSAGE/cseq=537 (rdata0x710bf4000b98) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: 1c81ae1a5c88e0e7413bee00f714b76b@0.0.0.0
+CSeq: 537 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=9f268f7c6437420bb63332282c67f329
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK4404002576;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>352602</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:25:31.824           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=537 (tdta0x710bf4002b70) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK4404002576
+Call-ID: 1c81ae1a5c88e0e7413bee00f714b76b@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=9f268f7c6437420bb63332282c67f329
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK4404002576
+CSeq: 537 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:25:31.824            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>352602</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:27:22.967           pjsua_core.c  .TX 647 bytes Request msg REGISTER/cseq=27610 (tdta0x710bf4002b70) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPj51234f3d-ea74-48ae-bccb-621ce08d3231
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=c6c680c3-c5dd-46a6-a978-891f9a47ffae
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27610 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:27:23.214           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27610 (rdata0x710bf4000b98) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27610 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=c6c680c3-c5dd-46a6-a978-891f9a47ffae
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPj51234f3d-ea74-48ae-bccb-621ce08d3231;received=13.50.108.195
+Date: 2025-06-05T02:27:23.093
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:27:23.214            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:27:23.214            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:27:23.214            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:27:23.214            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:13s
+18:27:23.856           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=538 (rdata0x710bf8000b98) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: c57afc773383bcb555b53ecafb202d47@0.0.0.0
+CSeq: 538 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=1b4a1b2e6a9f4bcd9aa128b7b512da8a
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK2716775251;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>852504</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:27:23.856           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=538 (tdta0x710bec000c20) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK2716775251
+Call-ID: c57afc773383bcb555b53ecafb202d47@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=1b4a1b2e6a9f4bcd9aa128b7b512da8a
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK2716775251
+CSeq: 538 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:27:23.856            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>852504</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:29:18.215           pjsua_core.c  .TX 647 bytes Request msg REGISTER/cseq=27611 (tdta0x710bec003750) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjc071aac2-48a0-41b4-870d-df2052868a86
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=46318ba7-2af3-4214-8379-a5495b27c4ae
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27611 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:29:18.439           pjsua_core.c  .RX 513 bytes Response msg 200/REGISTER/cseq=27611 (rdata0x710bec005618) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27611 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=46318ba7-2af3-4214-8379-a5495b27c4ae
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPjc071aac2-48a0-41b4-870d-df2052868a86;received=13.50.108.195
+Date: 2025-06-05T02:29:18.331
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:29:18.439            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:29:18.439            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:29:18.439            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:29:18.439            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:13s
+18:29:18.717           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=539 (rdata0x710bec004ee8) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: 8868dc24e08d0fd3a918f114aea7c032@0.0.0.0
+CSeq: 539 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=6e0ec75bc43f4b9ab2216e070b7c1257
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK1787902897;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>314556</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:29:18.717           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=539 (tdta0x710bf4000c20) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK1787902897
+Call-ID: 8868dc24e08d0fd3a918f114aea7c032@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=6e0ec75bc43f4b9ab2216e070b7c1257
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK1787902897
+CSeq: 539 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:29:18.717            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>314556</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:31:13.440           pjsua_core.c !.TX 647 bytes Request msg REGISTER/cseq=27612 (tdta0x710bf8000c20) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjfe9cc049-c111-4d24-b49c-b89ab9d6f1e6
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=71e5e340-74f3-423d-a5bf-566d439fb78f
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27612 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:31:13.661           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27612 (rdata0x710bf4005828) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27612 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=71e5e340-74f3-423d-a5bf-566d439fb78f
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPjfe9cc049-c111-4d24-b49c-b89ab9d6f1e6;received=13.50.108.195
+Date: 2025-06-05T02:31:13.548
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:31:13.661            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:31:13.661            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:31:13.661            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:31:13.661            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:13s
+18:31:13.770           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=540 (rdata0x710bf4001db8) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: a8c46b1fc04f7059a3dda4ccee6c2bc4@0.0.0.0
+CSeq: 540 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=02e8e3f572e54772927a116745fed82e
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK4999774236;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>654693</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:31:13.770           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=540 (tdta0x710bec000c20) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK4999774236
+Call-ID: a8c46b1fc04f7059a3dda4ccee6c2bc4@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=02e8e3f572e54772927a116745fed82e
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK4999774236
+CSeq: 540 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:31:13.770            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>654693</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:33:08.661           pjsua_core.c !.TX 647 bytes Request msg REGISTER/cseq=27613 (tdta0x710bfc001e00) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPj056de536-ad6d-4479-8084-7ef47edf8390
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=ea418729-22e4-4a77-8735-75815fd884fa
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27613 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:33:08.904           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27613 (rdata0x710bec005618) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27613 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=ea418729-22e4-4a77-8735-75815fd884fa
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPj056de536-ad6d-4479-8084-7ef47edf8390;received=13.50.108.195
+Date: 2025-06-05T02:33:08.785
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:33:08.904            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:33:08.904            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:33:08.904            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:33:08.904            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:12s
+18:33:09.170           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=541 (rdata0x710bf8000b98) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: 1f9b14ec438cc88c42a2231c4dd5ab10@0.0.0.0
+CSeq: 541 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=2623815297474e7d9e07ce953f01946b
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK0673151492;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>376427</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:33:09.170           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=541 (tdta0x710bec000c20) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK0673151492
+Call-ID: 1f9b14ec438cc88c42a2231c4dd5ab10@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=2623815297474e7d9e07ce953f01946b
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK0673151492
+CSeq: 541 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:33:09.170            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>376427</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:35:03.905           pjsua_core.c !.TX 647 bytes Request msg REGISTER/cseq=27614 (tdta0x710bf8000c20) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjdbc7ffd9-1d1e-4c13-b312-e0ea39909e1e
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=8da448f8-c301-4ba9-88f6-f6f5388fe420
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27614 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:35:04.121           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27614 (rdata0x710bec005618) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27614 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=8da448f8-c301-4ba9-88f6-f6f5388fe420
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPjdbc7ffd9-1d1e-4c13-b312-e0ea39909e1e;received=13.50.108.195
+Date: 2025-06-05T02:35:04.013
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:35:04.121            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:35:04.121            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:35:04.121            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:35:04.121            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:14s
+18:35:04.357           pjsua_core.c  .RX 580 bytes Request msg MESSAGE/cseq=542 (rdata0x710bfc001d78) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: b743f3862d31ab6995fa0b2aa9b5f05e@0.0.0.0
+CSeq: 542 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=95f88dc490754f82984ccb07643bed3c
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK2953480904;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>215531</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:35:04.357           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=542 (tdta0x710bfc004880) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK2953480904
+Call-ID: b743f3862d31ab6995fa0b2aa9b5f05e@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=95f88dc490754f82984ccb07643bed3c
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK2953480904
+CSeq: 542 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:35:04.357            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>215531</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:36:59.121           pjsua_core.c  .TX 647 bytes Request msg REGISTER/cseq=27615 (tdta0x710bfc004880) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjbd93643d-22b5-4c2c-a02c-3f40beac598a
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=b65fae34-780a-40f9-9407-27efab8a305b
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27615 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:36:59.342           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27615 (rdata0x710bfc001d78) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27615 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=b65fae34-780a-40f9-9407-27efab8a305b
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPjbd93643d-22b5-4c2c-a02c-3f40beac598a;received=13.50.108.195
+Date: 2025-06-05T02:36:59.233
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:36:59.342            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:36:59.342            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:36:59.342            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:36:59.342            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:12s
+18:36:59.514           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=543 (rdata0x710bec0036c8) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: 1fe970ed889e7c34fd190c814aed30cf@0.0.0.0
+CSeq: 543 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=cbc99dcfe80140f48cfaa18bd5599f23
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK7492033191;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>857167</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:36:59.514           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=543 (tdta0x710bf4000c20) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK7492033191
+Call-ID: 1fe970ed889e7c34fd190c814aed30cf@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=cbc99dcfe80140f48cfaa18bd5599f23
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK7492033191
+CSeq: 543 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:36:59.514            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>857167</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:38:54.343           pjsua_core.c  .TX 647 bytes Request msg REGISTER/cseq=27616 (tdta0x710bf4000c20) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPj646c7452-9b48-420c-b93b-b92bee07e5b3
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=15b1183c-5160-42e2-9c1f-ec88d5029fd8
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27616 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:38:54.562           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27616 (rdata0x710bf4005828) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27616 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=15b1183c-5160-42e2-9c1f-ec88d5029fd8
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPj646c7452-9b48-420c-b93b-b92bee07e5b3;received=13.50.108.195
+Date: 2025-06-05T02:38:54.453
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:38:54.562            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:38:54.562            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:38:54.562            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:38:54.562            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:12s
+18:38:54.654           pjsua_core.c  .RX 580 bytes Request msg MESSAGE/cseq=544 (rdata0x710bf8000b98) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: 6820c55e5409ebe6d39a3f598f7098b5@0.0.0.0
+CSeq: 544 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=d3809fd7a491473e80b6976d5c0d0e70
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK9158667344;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>499231</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:38:54.654           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=544 (tdta0x710bf8003750) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK9158667344
+Call-ID: 6820c55e5409ebe6d39a3f598f7098b5@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=d3809fd7a491473e80b6976d5c0d0e70
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK9158667344
+CSeq: 544 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:38:54.654            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>499231</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:40:49.562           pjsua_core.c  .TX 647 bytes Request msg REGISTER/cseq=27617 (tdta0x710bf8003750) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjdc829372-c10c-452d-82fa-d1c6632c621a
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=5e05f425-373d-4807-8b7e-f1cfc4b08109
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27617 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:40:49.789           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27617 (rdata0x710bf8000b98) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27617 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=5e05f425-373d-4807-8b7e-f1cfc4b08109
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPjdc829372-c10c-452d-82fa-d1c6632c621a;received=13.50.108.195
+Date: 2025-06-05T02:40:49.681
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:40:49.789            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:40:49.789            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:40:49.789            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:40:49.789            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:12s
+18:40:50.054           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=545 (rdata0x710bec0036c8) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: b3e316a9d8a955f3b1562dc3e6496e19@0.0.0.0
+CSeq: 545 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=daf5c4b391c140dbb49b22ef3ade4c6e
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK8344961351;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>761517</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:40:50.054           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=545 (tdta0x710bf4000c20) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK8344961351
+Call-ID: b3e316a9d8a955f3b1562dc3e6496e19@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=daf5c4b391c140dbb49b22ef3ade4c6e
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK8344961351
+CSeq: 545 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:40:50.055            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>761517</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:42:44.789           pjsua_core.c  .TX 647 bytes Request msg REGISTER/cseq=27618 (tdta0x710bf4000c20) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPj2b396f31-2fa9-477d-8e03-ceb79c28cb7b
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=67e1b1dd-a18c-437e-817e-eb200659dda5
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27618 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:42:45.058           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27618 (rdata0x710bf4005828) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27618 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=67e1b1dd-a18c-437e-817e-eb200659dda5
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPj2b396f31-2fa9-477d-8e03-ceb79c28cb7b;received=13.50.108.195
+Date: 2025-06-05T02:42:44.937
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:42:45.058            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:42:45.058            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:42:45.058            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:42:45.058            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:14s
+18:42:45.430           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=546 (rdata0x710bf8000b98) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: 6d6d253bac9c555496ff94f50c2a9c00@0.0.0.0
+CSeq: 546 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=0cca845713b94e1eada1f79cba93f3af
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK1024865808;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>942791</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:42:45.430           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=546 (tdta0x710bf4002df0) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK1024865808
+Call-ID: 6d6d253bac9c555496ff94f50c2a9c00@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=0cca845713b94e1eada1f79cba93f3af
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK1024865808
+CSeq: 546 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:42:45.430            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>942791</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:44:40.058           pjsua_core.c !.TX 647 bytes Request msg REGISTER/cseq=27619 (tdta0x710bfc001e00) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPj0a58bf2d-2c77-4f34-8718-836c59c2baab
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=99f02f91-6e11-4cc9-9040-4c4334ff37ea
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27619 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:44:40.282           pjsua_core.c  .RX 513 bytes Response msg 200/REGISTER/cseq=27619 (rdata0x710bf400b618) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27619 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=99f02f91-6e11-4cc9-9040-4c4334ff37ea
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPj0a58bf2d-2c77-4f34-8718-836c59c2baab;received=13.50.108.195
+Date: 2025-06-05T02:44:40.175
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:44:40.282            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:44:40.282            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:44:40.282            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:44:40.282            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:14s
+18:44:40.482           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=547 (rdata0x710bfc0076f8) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: bf0050a221b57642c7904a12df02081b@0.0.0.0
+CSeq: 547 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=632a61a8783942e394727a96bfee032a
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK4859696810;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>769437</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:44:40.482           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=547 (tdta0x710bf8000c20) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK4859696810
+Call-ID: bf0050a221b57642c7904a12df02081b@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=632a61a8783942e394727a96bfee032a
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK4859696810
+CSeq: 547 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:44:40.482            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>769437</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:46:35.282           pjsua_core.c !.TX 647 bytes Request msg REGISTER/cseq=27620 (tdta0x710bfc001e00) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPj70419aa1-a600-402f-8d37-ee017db5a969
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=f924e189-c6ef-41e7-a013-3e8fc7053be2
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27620 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:46:35.549           pjsua_core.c  .RX 513 bytes Response msg 200/REGISTER/cseq=27620 (rdata0x710bf8005618) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27620 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=f924e189-c6ef-41e7-a013-3e8fc7053be2
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPj70419aa1-a600-402f-8d37-ee017db5a969;received=13.50.108.195
+Date: 2025-06-05T02:46:35.439
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:46:35.549            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:46:35.549            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:46:35.549            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:46:35.549            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:13s
+18:46:35.875           pjsua_core.c !.RX 580 bytes Request msg MESSAGE/cseq=548 (rdata0x710bfc0076f8) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: 66f93c67dd53209d426f17b939482833@0.0.0.0
+CSeq: 548 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=92bf3ab58cef490ba53607d098829394
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK8001948118;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>411910</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:46:35.875           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=548 (tdta0x710bf4000c20) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK8001948118
+Call-ID: 66f93c67dd53209d426f17b939482833@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=92bf3ab58cef490ba53607d098829394
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK8001948118
+CSeq: 548 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:46:35.875            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>411910</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:48:30.550           pjsua_core.c  .TX 647 bytes Request msg REGISTER/cseq=27621 (tdta0x710bf4000c20) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjb9194e08-46f9-436e-947d-50622e55994b
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=207a8393-6802-4248-bdfb-4ad67d1b61ca
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27621 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:48:30.775           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27621 (rdata0x710bf4005828) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27621 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=207a8393-6802-4248-bdfb-4ad67d1b61ca
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPjb9194e08-46f9-436e-947d-50622e55994b;received=13.50.108.195
+Date: 2025-06-05T02:48:30.667
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:48:30.775            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:48:30.775            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:48:30.775            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:48:30.775            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:12s
+18:48:30.907           pjsua_core.c  .RX 580 bytes Request msg MESSAGE/cseq=549 (rdata0x710bec0036c8) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: b4ec3a5926755d536a8c96ea057bb825@0.0.0.0
+CSeq: 549 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=b4f5f1fca7564d0ba529625007e2df6a
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK2547174980;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>958094</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:48:30.907           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=549 (tdta0x710bec000c20) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK2547174980
+Call-ID: b4ec3a5926755d536a8c96ea057bb825@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=b4f5f1fca7564d0ba529625007e2df6a
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK2547174980
+CSeq: 549 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:48:30.907            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>958094</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:50:25.775           pjsua_core.c !.TX 647 bytes Request msg REGISTER/cseq=27622 (tdta0x710bf8000c20) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPj5aada377-04e0-4d44-8810-206d4294bbb5
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=96a635f5-50cc-460f-8192-d637593dbe49
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27622 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Content-Length:  0
+
+
+--end msg--
+18:50:26.002           pjsua_core.c !.RX 513 bytes Response msg 200/REGISTER/cseq=27622 (rdata0x710bec0036c8) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27622 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=96a635f5-50cc-460f-8192-d637593dbe49
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPj5aada377-04e0-4d44-8810-206d4294bbb5;received=13.50.108.195
+Date: 2025-06-05T02:50:25.890
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 120
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:50:26.002            pjsua_acc.c  ....SIP outbound status for acc 1 is not active
+18:50:26.002            pjsua_acc.c  ....Service-Route updated for acc 1 with 0 URI(s)
+18:50:26.002            pjsua_acc.c  ....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: registration success, status=200 (OK), will re-register in 120 seconds
+18:50:26.002            pjsua_acc.c  ....Keep-alive timer started for acc 1, destination:203.142.93.131:5060, interval:12s
+18:50:26.097           pjsua_core.c  .RX 580 bytes Request msg MESSAGE/cseq=550 (rdata0x710bf4005828) from UDP 203.142.93.131:5060:
+MESSAGE sip:81000000465001000001@13.50.108.195:5080 SIP/2.0
+Call-ID: 761a5bb33af1c0138d776ab1f7826530@0.0.0.0
+CSeq: 550 MESSAGE
+From: <sip:81000000462001888888@81000000>;tag=65cf4ba316bf40dfb5b3e9dc7aa1c05b
+To: <sip:81000000465001000001@13.50.108.195:5080>
+Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK1417263833;rport
+Max-Forwards: 70
+User-Agent: WVP-Pro 
+Content-Type: Application/MANSCDP+xml
+Content-Length: 154
+
+<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>521510</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+
+--end msg--
+18:50:26.097           pjsua_core.c  ..TX 347 bytes Response msg 200/MESSAGE/cseq=550 (tdta0x710bf4000c20) to UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 0.0.0.0:5060;rport=5060;received=203.142.93.131;branch=z9hG4bK1417263833
+Call-ID: 761a5bb33af1c0138d776ab1f7826530@0.0.0.0
+From: <sip:81000000462001888888@81000000>;tag=65cf4ba316bf40dfb5b3e9dc7aa1c05b
+To: <sip:81000000465001000001@13.50.108.195>;tag=z9hG4bK1417263833
+CSeq: 550 MESSAGE
+Content-Length:  0
+
+
+--end msg--
+18:50:26.097            pjsua_app.c  .MESSAGE from <sip:81000000462001888888@81000000>: <?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>521510</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+</Query>
+ (Application/MANSCDP+xml)
+18:52:08.088           conference.c !.Remove port 1 queued
+18:52:08.088           conference.c  .Remove port 2 queued
+18:52:08.088           pjsua_core.c  Shutting down, flags=0...
+18:52:08.088           pjsua_core.c  PJSUA state changed: RUNNING --> CLOSING
+18:52:08.091           pjsua_call.c  .Hangup all calls..
+18:52:08.091           pjsua_pres.c  .Shutting down presence..
+18:52:08.091            pjsua_acc.c  .Acc 1: setting unregistration..
+18:52:08.091           pjsua_core.c  ...TX 547 bytes Request msg REGISTER/cseq=27623 (tdta0x5806a1be22a0) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjf62d204b-5657-4f28-b5d6-10de60574b0c
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=17e446f3-dcf8-4788-adce-eefe8aa9f6bf
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27623 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 0
+Content-Length:  0
+
+
+--end msg--
+18:52:08.091            pjsua_acc.c  ..Acc 1: Unregistration sent
+18:52:08.591           pjsua_core.c  ..TX 547 bytes Request msg REGISTER/cseq=27623 (tdta0x5806a1be22a0) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjf62d204b-5657-4f28-b5d6-10de60574b0c
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=17e446f3-dcf8-4788-adce-eefe8aa9f6bf
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27623 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 0
+Content-Length:  0
+
+
+--end msg--
+18:52:09.591           pjsua_core.c  ..TX 547 bytes Request msg REGISTER/cseq=27623 (tdta0x5806a1be22a0) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPjf62d204b-5657-4f28-b5d6-10de60574b0c
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=17e446f3-dcf8-4788-adce-eefe8aa9f6bf
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27623 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 0
+Content-Length:  0
+
+
+--end msg--
+18:52:09.858           pjsua_core.c  ..RX 530 bytes Response msg 401/REGISTER/cseq=27623 (rdata0x710bf4005828) from UDP 203.142.93.131:5060:
+SIP/2.0 401 Unauthorized
+CSeq: 27623 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=17e446f3-dcf8-4788-adce-eefe8aa9f6bf
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPjf62d204b-5657-4f28-b5d6-10de60574b0c;received=13.50.108.195
+WWW-Authenticate: Digest realm="81000000",qop="auth",nonce="9f96c3809f6da810d9e7edb3ce72c963",algorithm=MD5
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:52:09.858           pjsua_core.c  .....TX 830 bytes Request msg REGISTER/cseq=27624 (tdta0x5806a1be22a0) to UDP 203.142.93.131:5060:
+REGISTER sip:ai-sip.x-stage.bull-b.com:5060 SIP/2.0
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport;branch=z9hG4bKPj33a281f3-309b-47a6-9ef5-68a62efc78db
+Max-Forwards: 70
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=17e446f3-dcf8-4788-adce-eefe8aa9f6bf
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+CSeq: 27624 REGISTER
+User-Agent: PJSUA/v2.15-dev Linux-6.8.4.4 x86_64 glibc-2.39
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 0
+Authorization: Digest username="81000000465001000001", realm="81000000", nonce="9f96c3809f6da810d9e7edb3ce72c963", uri="sip:ai-sip.x-stage.bull-b.com:5060", response="713e82b9bd719e52e51d9286f282ce45", algorithm=MD5, cnonce="b093b401933e4fcaa3240d0d6456d11a", qop=auth, nc=00000001
+Content-Length:  0
+
+
+--end msg--
+18:52:10.105           pjsua_core.c  ..RX 511 bytes Response msg 200/REGISTER/cseq=27624 (rdata0x5806a1be9938) from UDP 203.142.93.131:5060:
+SIP/2.0 200 OK
+CSeq: 27624 REGISTER
+Call-ID: aa7188c7-5f14-443f-9fc5-3b7c7a52d079
+From: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>;tag=17e446f3-dcf8-4788-adce-eefe8aa9f6bf
+To: <sip:81000000465001000001@ai-sip.x-stage.bull-b.com>
+Via: SIP/2.0/UDP 13.50.108.195:5080;rport=5080;branch=z9hG4bKPj33a281f3-309b-47a6-9ef5-68a62efc78db;received=13.50.108.195
+Date: 2025-06-05T02:52:09.986
+Contact: <sip:81000000465001000001@172.31.7.94:5080;ob>
+Expires: 0
+User-Agent: WVP-Pro 
+Content-Length: 0
+
+
+--end msg--
+18:52:10.105            pjsua_acc.c  .....sip:81000000465001000001@ai-sip.x-stage.bull-b.com: unregistration success
+18:52:10.135           pjsua_core.c  .Destroying...
+18:52:10.135        sip_transport.c  .Transport udp0x5806a1be0790 shutting down, force=0
+18:52:10.135          pjsua_media.c  .Shutting down media..
+18:52:10.139           conference.c  ...Stop any transmission to port 1 (ringback)
+18:52:10.139           conference.c  ...Stop any transmission from port 1 (ringback)
+18:52:10.139           conference.c  ...Removed port 1 (ringback), port count=2
+18:52:10.139           conference.c  ...Stop any transmission to port 2 (ring)
+18:52:10.139           conference.c  ...Stop any transmission from port 2 (ring)
+18:52:10.139           conference.c  ...Removed port 2 (ring), port count=1
+18:52:10.139           conference.c  ...Stop any transmission to port 0 (Master/sound)
+18:52:10.139           conference.c  ...Stop any transmission from port 0 (Master/sound)
+18:52:10.139           conference.c  ...Removed port 0 (Master/sound), port count=0
+18:52:10.139      sip_transaction.c  .Stopping transaction layer module
+18:52:10.139      sip_transaction.c  .Stopped transaction layer module
+18:52:10.139         sip_endpoint.c  .Module "mod-default-handler" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-unsolicited-mwi" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-pjsua-options" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-pjsua-im" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-pjsua-pres" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-pjsua" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-stateful-util" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-refer" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-mwi" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-dlg_even" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-presence" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-evsub" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-invite" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-100rel" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-ua" unregistered
+18:52:10.139      sip_transaction.c  .Transaction layer module destroyed
+18:52:10.139         sip_endpoint.c  .Module "mod-tsx-layer" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-msg-print" unregistered
+18:52:10.139         sip_endpoint.c  .Module "mod-pjsua-log" unregistered
+18:52:10.140      udp0x5806a1be0790  .SIP UDP transport destroyed
+18:52:10.140                timer.c  .Dumping timer heap:
+18:52:10.140                timer.c  .  Cur size: 0 entries, max: 3070
+18:52:10.140         sip_endpoint.c  .Endpoint 0x5806a1b68da0 destroyed
+18:52:10.140           pjsua_core.c  .PJSUA state changed: CLOSING --> NULL
+18:52:10.140           pjsua_core.c  .PJSUA destroyed...
