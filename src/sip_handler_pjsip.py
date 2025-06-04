@@ -841,8 +841,44 @@ class SIPClient:
             
             if message_size > 1400:
                 log.error(f"[SIP] ❌ Response still too large ({message_size} bytes) - further reduction needed")
-                # Emergency fallback: send minimal response
-                response_xml = f"""<?xml version="1.0" encoding="GB2312"?>
+                # Emergency fallback: send minimal response with 1 parent + 1 channel
+                first_channel = None
+                if catalog_items:
+                    first_channel_id, first_channel_info = catalog_items[0]
+                    first_channel = f"""    <Item>
+      <DeviceID>{first_channel_id}</DeviceID>
+      <Name>{first_channel_info['name']}</Name>
+      <Manufacturer>GB28181-RestreamerProject</Manufacturer>
+      <Model>Video-Channel</Model>
+      <Status>ON</Status>
+      <Parental>0</Parental>
+      <ParentID>{self.device_id}</ParentID>
+    </Item>"""
+                
+                if first_channel:
+                    # Include parent + 1 channel
+                    response_xml = f"""<?xml version="1.0" encoding="GB2312"?>
+<Response>
+  <CmdType>Catalog</CmdType>
+  <SN>{sn}</SN>
+  <DeviceID>{self.device_id}</DeviceID>
+  <Result>OK</Result>
+  <SumNum>2</SumNum>
+  <DeviceList Num="2">
+    <Item>
+      <DeviceID>{self.device_id}</DeviceID>
+      <Name>GB28181-Restreamer</Name>
+      <Manufacturer>GB28181-RestreamerProject</Manufacturer>
+      <Model>Restreamer-1.0</Model>
+      <Status>ON</Status>
+      <Parental>1</Parental>
+    </Item>
+{first_channel}
+  </DeviceList>
+</Response>"""
+                else:
+                    # Fallback to parent only
+                    response_xml = f"""<?xml version="1.0" encoding="GB2312"?>
 <Response>
   <CmdType>Catalog</CmdType>
   <SN>{sn}</SN>
@@ -859,6 +895,7 @@ class SIPClient:
     </Item>
   </DeviceList>
 </Response>"""
+                
                 message_size = len(response_xml.encode('utf-8'))
                 log.warning(f"[SIP] 🔧 Using minimal response ({message_size} bytes) to prevent fragmentation")
             else:
