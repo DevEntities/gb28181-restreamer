@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GB2312"?>
+<Response>
+  <CmdType>Catalog</CmdType>
+  <SN>963249</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+  <Result>OK</Result>
+  <SumNum>1</SumNum>
+  <DeviceList Num="1">
+    <Item>
+      <DeviceID>810000004650131000001</DeviceID>
+      <Name>00-10-10</Name>
+      <Manufacturer>GB28181-RestreamerProject</Manufacturer>
+      <Model>Virtual-Channel</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Video Channel</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+  </DeviceList>
+</Response>

@@ -755,23 +755,14 @@ class SIPClient:
                 # Use the cached catalog
                 catalog_items = list(self.device_catalog.items())
                 
-            log.info(f"[SIP] Using cached device catalog with {len(catalog_items)} channels")
+            log.info(f"[SIP] Using cached catalog with {len(catalog_items)} video channels")
             
-            # CRITICAL FIX: Limit catalog size to prevent UDP fragmentation
-            # UDP packets should be under 1400 bytes to avoid fragmentation
-            # Each device item is ~700 bytes, so limit to 1 parent + 1 channel for safety
-            max_channels_per_response = 1  # Start with just 1 channel to test
-            
-            if len(catalog_items) > max_channels_per_response:
-                log.warning(f"[SIP] 🚨 Large catalog detected ({len(catalog_items)} channels)")
-                log.warning(f"[SIP] 🔧 Limiting to {max_channels_per_response} channels to prevent UDP fragmentation")
-                catalog_items = catalog_items[:max_channels_per_response]
-            
-            # Build XML items list from cached catalog
+            # Build XML items for COMPLETE CATALOG FORMAT (parent device + channels)
+            # CRITICAL FIX: WVP platform requires the parent device as first item, then channels
             xml_items = []
             
-            # ADDED: Include the parent device itself in the catalog for proper WVP hierarchy
-            parent_item_xml = f"""    <Item>
+            # STEP 1: Add the parent device as the first item (required by WVP)
+            parent_device_xml = f"""    <Item>
       <DeviceID>{self.device_id}</DeviceID>
       <Name>GB28181-Restreamer</Name>
       <Manufacturer>GB28181-RestreamerProject</Manufacturer>
@@ -779,34 +770,49 @@ class SIPClient:
       <Owner>gb28181-restreamer</Owner>
       <CivilCode>{self.device_id[:6]}</CivilCode>
       <Block>{self.device_id[:8]}</Block>
-      <Address>Local Stream Server</Address>
-      <Parental>1</Parental>
-      <ParentID>{self.device_id[:10]}000000</ParentID>
+      <Address>gb28181-restreamer</Address>
+      <Parental>0</Parental>
       <SafetyWay>0</SafetyWay>
       <RegisterWay>1</RegisterWay>
+      <CertNum>1234567890</CertNum>
+      <Certifiable>1</Certifiable>
+      <ErrCode>0</ErrCode>
+      <EndTime></EndTime>
       <Secrecy>0</Secrecy>
-      <IPAddress></IPAddress>
-      <Port>0</Port>
+      <IPAddress>{self.local_ip}</IPAddress>
+      <Port>{self.local_port}</Port>
       <Password></Password>
       <Status>ON</Status>
-      <Longitude>116.307629</Longitude>
-      <Latitude>39.984094</Latitude>
+      <Longitude>0.0</Longitude>
+      <Latitude>0.0</Latitude>
+      <PTZType>0</PTZType>
+      <PositionType>0</PositionType>
+      <RoomType>0</RoomType>
+      <UseType>0</UseType>
+      <SupplyLightType>0</SupplyLightType>
+      <DirectionType>0</DirectionType>
+      <Resolution>640*480</Resolution>
+      <BusinessGroupID></BusinessGroupID>
+      <DownloadSpeed></DownloadSpeed>
+      <SVCSpaceSupportMode>0</SVCSpaceSupportMode>
+      <SVCTimeSupportMode>0</SVCTimeSupportMode>
     </Item>"""
-            xml_items.append(parent_item_xml)
+            xml_items.append(parent_device_xml)
             
-            # Add limited channel devices to prevent fragmentation
+            # STEP 2: Add video channels as child items with Parental=1
             for channel_id, channel_info in catalog_items:
+                # Use compact format for UDP efficiency while maintaining WVP compatibility
                 channel_item_xml = f"""    <Item>
       <DeviceID>{channel_id}</DeviceID>
       <Name>{channel_info['name']}</Name>
-      <Manufacturer>{channel_info['manufacturer']}</Manufacturer>
-      <Model>{channel_info['model']}</Model>
+      <Manufacturer>GB28181-RestreamerProject</Manufacturer>
+      <Model>Virtual-Channel</Model>
       <Owner>gb28181-restreamer</Owner>
       <CivilCode>{self.device_id[:6]}</CivilCode>
       <Block>{self.device_id[:8]}</Block>
-      <Address>Local Stream</Address>
-      <Parental>0</Parental>
-      <ParentID>{channel_info['parent_id']}</ParentID>
+      <Address>Channel {channel_info['name']}</Address>
+      <Parental>1</Parental>
+      <ParentID>{self.device_id}</ParentID>
       <SafetyWay>0</SafetyWay>
       <RegisterWay>1</RegisterWay>
       <Secrecy>0</Secrecy>
@@ -814,170 +820,114 @@ class SIPClient:
       <Port>0</Port>
       <Password></Password>
       <Status>{channel_info['status']}</Status>
-      <Longitude>116.307629</Longitude>
-      <Latitude>39.984094</Latitude>
     </Item>"""
                 xml_items.append(channel_item_xml)
 
-            # UPDATED: Total count includes parent device + limited channels
-            total_count = len(catalog_items) + 1  # +1 for parent device
+            # Total count includes parent device + channels
+            total_count = len(xml_items)  # 1 parent + N channels
             
-            # Generate final response XML with detailed validation
-            response_xml = f"""<?xml version="1.0" encoding="GB2312"?>
-<Response>
-  <CmdType>Catalog</CmdType>
-  <SN>{sn}</SN>
-  <DeviceID>{self.device_id}</DeviceID>
-  <Result>OK</Result>
-  <SumNum>{total_count}</SumNum>
-  <DeviceList Num="{total_count}">
-{chr(10).join(xml_items)}
-  </DeviceList>
-</Response>"""
+            # FIXED: Check message size for UDP safety with proper newlines
+            xml_content = "\n".join(xml_items)  # FIXED: Use actual newlines, not \\n
+            estimated_size = len(xml_content) + 1000  # Add overhead for headers
             
-            # Check message size before sending
-            message_size = len(response_xml.encode('utf-8'))
-            log.info(f"[SIP] 📏 Catalog response size: {message_size} bytes")
+            log.info(f"[SIP] 🏗️ Building WVP-compatible catalog response:")
+            log.info(f"[SIP]   • Parent Device: {self.device_id} (GB28181-Restreamer)")
+            log.info(f"[SIP]   • Child Channels: {len(catalog_items)}")
+            log.info(f"[SIP]   • Total Items: {total_count}")
+            log.info(f"[SIP]   • Estimated size: {estimated_size} bytes")
             
-            if message_size > 1400:
-                log.error(f"[SIP] ❌ Response still too large ({message_size} bytes) - further reduction needed")
-                # Emergency fallback: send minimal response with 1 parent + 1 channel
-                first_channel = None
-                if catalog_items:
-                    first_channel_id, first_channel_info = catalog_items[0]
-                    first_channel = f"""    <Item>
-      <DeviceID>{first_channel_id}</DeviceID>
-      <Name>{first_channel_info['name']}</Name>
-      <Manufacturer>GB28181-RestreamerProject</Manufacturer>
-      <Model>Video-Channel</Model>
-      <Status>ON</Status>
-      <Parental>0</Parental>
-      <ParentID>{self.device_id}</ParentID>
-    </Item>"""
+            # FIXED: Apply reasonable UDP size limits but less aggressive for parent+children format
+            if estimated_size > 3000:  # Higher limit since we need parent + at least some channels
+                log.warning(f"[SIP] ⚠️ Large response ({estimated_size} bytes) - limiting channels for UDP safety")
                 
-                if first_channel:
-                    # Include parent + 1 channel
-                    response_xml = f"""<?xml version="1.0" encoding="GB2312"?>
-<Response>
-  <CmdType>Catalog</CmdType>
-  <SN>{sn}</SN>
-  <DeviceID>{self.device_id}</DeviceID>
-  <Result>OK</Result>
-  <SumNum>2</SumNum>
-  <DeviceList Num="2">
-    <Item>
-      <DeviceID>{self.device_id}</DeviceID>
-      <Name>GB28181-Restreamer</Name>
-      <Manufacturer>GB28181-RestreamerProject</Manufacturer>
-      <Model>Restreamer-1.0</Model>
-      <Status>ON</Status>
-      <Parental>1</Parental>
-    </Item>
-{first_channel}
-  </DeviceList>
-</Response>"""
-                else:
-                    # Fallback to parent only
-                    response_xml = f"""<?xml version="1.0" encoding="GB2312"?>
-<Response>
-  <CmdType>Catalog</CmdType>
-  <SN>{sn}</SN>
-  <DeviceID>{self.device_id}</DeviceID>
-  <Result>OK</Result>
-  <SumNum>1</SumNum>
-  <DeviceList Num="1">
-    <Item>
-      <DeviceID>{self.device_id}</DeviceID>
-      <Name>GB28181-Restreamer</Name>
-      <Manufacturer>GB28181-RestreamerProject</Manufacturer>
-      <Model>Restreamer-1.0</Model>
-      <Status>ON</Status>
-    </Item>
-  </DeviceList>
-</Response>"""
+                # Always keep the parent device (first item), limit channels
+                safe_items = [xml_items[0]]  # Parent device must be included
+                running_size = len(xml_items[0].encode('utf-8')) + 800  # Base response size + headers
                 
-                message_size = len(response_xml.encode('utf-8'))
-                log.warning(f"[SIP] 🔧 Using minimal response ({message_size} bytes) to prevent fragmentation")
+                # Add as many channels as fit within UDP limit
+                for channel_item in xml_items[1:]:  # Skip parent device (already added)
+                    item_size = len(channel_item.encode('utf-8'))
+                    if running_size + item_size < 3000:  # Allow more space for this format
+                        safe_items.append(channel_item)
+                        running_size += item_size
+                    else:
+                        break
+                
+                xml_content = "\n".join(safe_items)
+                actual_count = len(safe_items)
+                channel_count = actual_count - 1  # Subtract parent device
+                log.info(f"[SIP] 📦 Limited to parent device + {channel_count} channels (total: {actual_count} items)")
             else:
-                log.info(f"[SIP] ✅ Response size acceptable for UDP transmission")
-            
-            # COMPREHENSIVE VALIDATION: Verify XML integrity before sending
-            import xml.etree.ElementTree as ET
-            try:
-                # Parse our own XML to validate structure
-                root = ET.fromstring(response_xml)
-                device_list = root.find('DeviceList')
-                actual_items = device_list.findall('Item') if device_list is not None else []
-                actual_count = len(actual_items)
-                declared_sum = int(root.find('SumNum').text)
-                declared_num = int(device_list.get('Num')) if device_list is not None else 0
-                
-                # Detailed validation logging
-                log.info(f"[SIP] 🔍 XML VALIDATION RESULTS:")
-                log.info(f"[SIP]   • Declared SumNum: {declared_sum}")
-                log.info(f"[SIP]   • Declared Num: {declared_num}")
-                log.info(f"[SIP]   • Actual <Item> count: {actual_count}")
-                log.info(f"[SIP]   • XML size: {len(response_xml)} bytes")
-                
-                if declared_sum == declared_num == actual_count:
-                    log.info(f"[SIP] ✅ XML validation PASSED - all counts match ({actual_count})")
-                else:
-                    log.error(f"[SIP] ❌ XML validation FAILED - count mismatch!")
-                    log.error(f"[SIP]   Expected: {declared_sum}, Got: {actual_count}")
-                    
-                    # Try to fix the XML if there's a minor mismatch
-                    if actual_count > 0:
-                        log.info(f"[SIP] 🔧 Attempting to fix XML counts...")
-                        # Regenerate with correct counts
-                        response_xml = response_xml.replace(f'<SumNum>{declared_sum}</SumNum>', f'<SumNum>{actual_count}</SumNum>')
-                        response_xml = response_xml.replace(f'Num="{declared_num}"', f'Num="{actual_count}"')
-                        log.info(f"[SIP] ✅ XML counts corrected to {actual_count}")
-                
-                # Log first few device IDs for verification
-                for i, item in enumerate(actual_items[:3]):
-                    device_id_elem = item.find('DeviceID')
-                    name_elem = item.find('Name')
-                    if device_id_elem is not None and name_elem is not None:
-                        log.info(f"[SIP]   Device {i+1}: {device_id_elem.text} ({name_elem.text})")
-                
-                if len(actual_items) > 3:
-                    log.info(f"[SIP]   ... and {len(actual_items) - 3} more devices")
-                    
-            except ET.ParseError as parse_error:
-                log.error(f"[SIP] ❌ XML PARSE ERROR: {parse_error}")
-                log.error(f"[SIP] Problematic XML (first 500 chars): {response_xml[:500]}")
-                # Return a minimal valid response instead
-                return f"""<?xml version="1.0" encoding="GB2312"?>
+                safe_items = xml_items
+                actual_count = total_count
+                channel_count = len(catalog_items)
+                log.info(f"[SIP] 📦 Including parent device + all {channel_count} channels (total: {actual_count} items)")
+
+            # FIXED: Generate the XML response with proper WVP-compatible format
+            xml_response = f"""<?xml version="1.0" encoding="GB2312"?>
 <Response>
-  <CmdType>Catalog</CmdType>
-  <SN>{sn}</SN>
-  <DeviceID>{self.device_id}</DeviceID>
-  <Result>Error</Result>
-  <SumNum>0</SumNum>
-  <DeviceList Num="0">
-  </DeviceList>
+<CmdType>Catalog</CmdType>
+<SN>{sn}</SN>
+<DeviceID>{self.device_id}</DeviceID>
+<Result>OK</Result>
+<SumNum>{actual_count}</SumNum>
+<DeviceList Num="{actual_count}">
+{xml_content}
+</DeviceList>
 </Response>"""
+
+            # Validate the response structure
+            message_size = len(xml_response.encode('utf-8'))
+            log.info(f"[SIP] 📊 Final WVP-compatible catalog response:")
+            log.info(f"[SIP]   • Message size: {message_size} bytes")
+            log.info(f"[SIP]   • SumNum: {actual_count}")
+            log.info(f"[SIP]   • DeviceList Num: {actual_count}")
+            log.info(f"[SIP]   • Structure: 1 Parent Device + {actual_count-1} Channels")
             
-            log.info(f"[SIP] 📂 Generated UDP-safe catalog with {len(catalog_items)} channels + 1 parent device (total: {total_count})")
-            log.debug(f"[SIP] Catalog XML preview: {response_xml[:500]}...")
-            
-            return response_xml
-            
+            # FIXED: Final size check with better fallback - ensure at least parent + 1 channel
+            if message_size > 4000:  # Higher threshold for parent+children format
+                log.error(f"[SIP] ❌ Response still too large ({message_size} bytes) - using minimal fallback")
+                # Emergency fallback: Parent device + 1 channel only
+                minimal_items = [xml_items[0]]  # Parent device
+                if len(xml_items) > 1:
+                    minimal_items.append(xml_items[1])  # First channel
+                
+                minimal_xml = "\n".join(minimal_items)
+                xml_response = f"""<?xml version="1.0" encoding="GB2312"?>
+<Response>
+<CmdType>Catalog</CmdType>
+<SN>{sn}</SN>
+<DeviceID>{self.device_id}</DeviceID>
+<Result>OK</Result>
+<SumNum>{len(minimal_items)}</SumNum>
+<DeviceList Num="{len(minimal_items)}">
+{minimal_xml}
+</DeviceList>
+</Response>"""
+                log.info(f"[SIP] 📦 Emergency fallback: parent device + 1 channel, {len(xml_response.encode('utf-8'))} bytes")
+
+            return xml_response
+
         except Exception as e:
             log.error(f"[SIP] Error generating catalog response: {e}")
-            import traceback
-            log.debug(f"[SIP] Traceback: {traceback.format_exc()}")
-            
-            # Return a minimal valid response to prevent platform errors
+            # FIXED: Return minimal valid response with parent device
             return f"""<?xml version="1.0" encoding="GB2312"?>
 <Response>
-  <CmdType>Catalog</CmdType>
-  <SN>{sn}</SN>
-  <DeviceID>{self.device_id}</DeviceID>
-  <Result>Error</Result>
-  <SumNum>0</SumNum>
-  <DeviceList Num="0">
-  </DeviceList>
+<CmdType>Catalog</CmdType>
+<SN>{sn}</SN>
+<DeviceID>{self.device_id}</DeviceID>
+<Result>OK</Result>
+<SumNum>1</SumNum>
+<DeviceList Num="1">
+    <Item>
+      <DeviceID>{self.device_id}</DeviceID>
+      <Name>GB28181-Restreamer</Name>
+      <Manufacturer>GB28181-RestreamerProject</Manufacturer>
+      <Model>Restreamer-1.0</Model>
+      <Status>ON</Status>
+      <Parental>0</Parental>
+    </Item>
+</DeviceList>
 </Response>"""
 
     def handle_device_info_query(self, msg_text):
@@ -1618,15 +1568,20 @@ class SIPClient:
                     log.info(f"[SIP] ✅ PJSUA XML collection complete (end msg): {len(complete_xml)} characters")
                     log.debug(f"[SIP] Complete XML: {complete_xml}")
                     self._process_xml_content(complete_xml)
+                else:
+                    log.warning("[SIP] ⚠️ No XML collected before end msg")
                 
                 # Reset collection
                 self._collecting_pjsua_xml = False
                 self._pjsua_xml_lines = []
                 return
             
+            # ENHANCED DEBUG: Log what we're processing
+            log.debug(f"[SIP] 🔍 XML line analysis: '{stripped_line}' - is_xml: {is_xml_line}")
+            
             if is_xml_line:
                 self._pjsua_xml_lines.append(stripped_line)
-                log.debug(f"[SIP] 📝 Added XML line: {stripped_line}")
+                log.debug(f"[SIP] 📝 Added XML line ({len(self._pjsua_xml_lines)} total): {stripped_line}")
                 
                 # Check if this line completes the XML
                 if stripped_line.endswith('</Query>') or stripped_line.endswith('</Response>') or stripped_line.endswith('</Control>'):
@@ -1682,7 +1637,9 @@ class SIPClient:
                         
                         return
             else:
-                # Non-XML line encountered
+                # Non-XML line encountered - log what we're skipping
+                log.debug(f"[SIP] 🚫 Skipping non-XML line: '{stripped_line}'")
+                
                 # If we have incomplete XML, continue collecting a bit more
                 # But if we hit multiple non-XML lines, stop collecting
                 if not hasattr(self, '_non_xml_line_count'):
@@ -1690,7 +1647,7 @@ class SIPClient:
                 
                 self._non_xml_line_count += 1
                 
-                if self._non_xml_line_count > 3:  # Allow up to 3 non-XML lines
+                if self._non_xml_line_count > 10:  # FIXED: Increased from 3 to 10 to allow for SIP headers
                     # Too many non-XML lines, check if we have valid XML to process
                     if self._pjsua_xml_lines:
                         xml_text = '\n'.join(self._pjsua_xml_lines)
@@ -1707,6 +1664,8 @@ class SIPClient:
                             self._process_xml_content(xml_text)
                         else:
                             log.warning(f"[SIP] ⚠️ XML collection abandoned - incomplete: {xml_text[:100]}...")
+                    else:
+                        log.warning("[SIP] ⚠️ XML collection abandoned - no XML collected")
                     
                     # Reset collection
                     self._collecting_pjsua_xml = False
@@ -2492,8 +2451,8 @@ Content-Length: {len(xml_content)}
             
             log.info(f"[SIP] 💓 Sending WVP-compatible keepalive (SN: {sn}) to prevent heartbeat timeout")
             
-            # Send via our reliable file-based method
-            success = self.send_sip_message(keepalive_xml)
+            # FIXED: Send kkeepalive via dedicated UDP socket, not catalog response method
+            success = self._send_keepalive_message(keepalive_xml, sn)
             
             if success:
                 self.last_keepalive_time = current_time
@@ -2527,6 +2486,73 @@ Content-Length: {len(xml_content)}
             except Exception as retry_error:
                 log.error(f"[SIP] ❌ Emergency registration renewal also failed: {retry_error}")
 
+    def _send_keepalive_message(self, keepalive_xml, sn):
+        """Send keepalive message via clean UDP socket"""
+        try:
+            import socket
+            import time
+            
+            # Generate unique identifiers for the SIP message
+            current_time = int(time.time())
+            call_id = f"keepalive-{sn}-{current_time}"
+            branch = f"z9hG4bK-ka-{current_time}"
+            tag = f"katag{current_time}"
+            cseq = sn % 9999 + 2000  # Different range for keepalives
+            
+            # Build SIP URIs
+            from_uri = f"sip:{self.device_id}@{self.local_ip}:{self.local_port}"
+            to_uri = f"sip:{self.server}:{self.port}"
+            contact_uri = f"<sip:{self.local_ip}:{self.local_port}>"
+            
+            # Build complete SIP MESSAGE for keepalive
+            sip_message = f"""MESSAGE {to_uri} SIP/2.0
+Via: SIP/2.0/UDP {self.local_ip}:{self.local_port};rport;branch={branch}
+Max-Forwards: 70
+From: <{from_uri}>;tag={tag}
+To: <{to_uri}>
+Call-ID: {call_id}
+CSeq: {cseq} MESSAGE
+Contact: {contact_uri}
+User-Agent: GB28181-Restreamer/1.0
+Content-Type: Application/MANSCDP+xml
+Content-Length: {len(keepalive_xml)}
+
+{keepalive_xml}"""
+            
+            # Create a new UDP socket for keepalive only
+            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            
+            try:
+                sock.settimeout(3.0)  # Shorter timeout for keepalives
+                
+                # Log keepalive attempt
+                message_bytes = sip_message.encode('utf-8')
+                log.debug(f"[SIP] 💓 Sending keepalive UDP packet ({len(message_bytes)} bytes) to {self.server}:{self.port}")
+                
+                # Send the keepalive message
+                bytes_sent = sock.sendto(message_bytes, (self.server, self.port))
+                
+                # Verify transmission
+                if bytes_sent == len(message_bytes):
+                    log.debug(f"[SIP] ✅ Keepalive UDP transmission successful: {bytes_sent} bytes")
+                    return True
+                else:
+                    log.error(f"[SIP] ❌ Keepalive UDP transmission incomplete: {bytes_sent}/{len(message_bytes)} bytes")
+                    return False
+                
+            except socket.timeout:
+                log.error(f"[SIP] ❌ Keepalive UDP send timeout")
+                return False
+            except socket.error as send_error:
+                log.error(f"[SIP] ❌ Keepalive UDP socket error: {send_error}")
+                return False
+            finally:
+                sock.close()
+                
+        except Exception as e:
+            log.error(f"[SIP] ❌ Error creating keepalive UDP socket: {e}")
+            return False
+
     def _send_proactive_catalog_notification(self):
         """Send proactive catalog notification to WVP platform for immediate frontend visibility"""
         try:
@@ -2536,23 +2562,19 @@ Content-Length: {len(xml_content)}
             import random
             proactive_sn = random.randint(800000, 999999)  # Use pure numeric SN instead of string
             
-            # Generate catalog response XML with our current device catalog  
-            catalog_xml = f"""<?xml version="1.0" encoding="GB2312"?>
-<Response>
-  <CmdType>Catalog</CmdType>
-  <SN>{proactive_sn}</SN>
-  <DeviceID>{self.device_id}</DeviceID>
-  <Result>OK</Result>
-  <SumNum>{len(self.device_catalog) + 1}</SumNum>
-  <DeviceList Num="{len(self.device_catalog) + 1}">
-    <Item>
+            # FIXED: Use the same format as regular catalog responses - parent device + channels
+            # This ensures consistency between proactive notifications and query responses
+            catalog_xml_items = []
+            
+            # STEP 1: Add the parent device as the first item (same as catalog responses)
+            parent_device_xml = f"""    <Item>
       <DeviceID>{self.device_id}</DeviceID>
       <Name>GB28181-Restreamer</Name>
       <Manufacturer>GB28181-RestreamerProject</Manufacturer>
       <Model>Restreamer-1.0</Model>
       <Owner>gb28181-restreamer</Owner>
-      <CivilCode>810000</CivilCode>
-      <Block>810000</Block>
+      <CivilCode>{self.device_id[:6]}</CivilCode>
+      <Block>{self.device_id[:8]}</Block>
       <Address>gb28181-restreamer</Address>
       <Parental>0</Parental>
       <SafetyWay>0</SafetyWay>
@@ -2563,7 +2585,7 @@ Content-Length: {len(xml_content)}
       <EndTime></EndTime>
       <Secrecy>0</Secrecy>
       <IPAddress>{self.local_ip}</IPAddress>
-      <Port>5080</Port>
+      <Port>{self.local_port}</Port>
       <Password></Password>
       <Status>ON</Status>
       <Longitude>0.0</Longitude>
@@ -2580,53 +2602,81 @@ Content-Length: {len(xml_content)}
       <SVCSpaceSupportMode>0</SVCSpaceSupportMode>
       <SVCTimeSupportMode>0</SVCTimeSupportMode>
     </Item>"""
+            catalog_xml_items.append(parent_device_xml)
             
-            # Add each video channel to the catalog  
+            # STEP 2: Add each video channel as child items with Parental=1
             for channel_id, channel_info in self.device_catalog.items():
-                catalog_xml += f"""
-    <Item>
+                # Use compact format for UDP efficiency while maintaining WVP compatibility
+                channel_item_xml = f"""    <Item>
       <DeviceID>{channel_id}</DeviceID>
       <Name>{channel_info['name']}</Name>
       <Manufacturer>GB28181-RestreamerProject</Manufacturer>
       <Model>Virtual-Channel</Model>
       <Owner>gb28181-restreamer</Owner>
-      <CivilCode>810000</CivilCode>
-      <Block>810000</Block>
+      <CivilCode>{self.device_id[:6]}</CivilCode>
+      <Block>{self.device_id[:8]}</Block>
       <Address>Channel {channel_info['name']}</Address>
       <Parental>1</Parental>
       <ParentID>{self.device_id}</ParentID>
       <SafetyWay>0</SafetyWay>
       <RegisterWay>1</RegisterWay>
-      <CertNum>1234567890</CertNum>
-      <Certifiable>1</Certifiable>
-      <ErrCode>0</ErrCode>
-      <EndTime></EndTime>
       <Secrecy>0</Secrecy>
-      <IPAddress>{self.local_ip}</IPAddress>
-      <Port>5080</Port>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
       <Password></Password>
-      <Status>ON</Status>
-      <Longitude>0.0</Longitude>
-      <Latitude>0.0</Latitude>
-      <PTZType>0</PTZType>
-      <PositionType>0</PositionType>
-      <RoomType>0</RoomType>
-      <UseType>0</UseType>
-      <SupplyLightType>0</SupplyLightType>
-      <DirectionType>0</DirectionType>
-      <Resolution>640*480</Resolution>
-      <BusinessGroupID></BusinessGroupID>
-      <DownloadSpeed></DownloadSpeed>
-      <SVCSpaceSupportMode>0</SVCSpaceSupportMode>
-      <SVCTimeSupportMode>0</SVCTimeSupportMode>
+      <Status>{channel_info['status']}</Status>
     </Item>"""
-                    
-            catalog_xml += """
+                catalog_xml_items.append(channel_item_xml)
+            
+            # FIXED: Check message size and limit channels for UDP safety (same as regular response)
+            xml_content = "\n".join(catalog_xml_items)
+            estimated_size = len(xml_content) + 1000  # Add overhead for headers
+            
+            # Apply same UDP size limits as regular catalog responses
+            if estimated_size > 3000:  # Conservative limit for WVP
+                log.warning(f"[SIP] ⚠️ Large proactive notification ({estimated_size} bytes) - limiting channels")
+                
+                # Always keep the parent device (first item), limit channels
+                safe_items = [catalog_xml_items[0]]  # Parent device must be included
+                running_size = len(catalog_xml_items[0].encode('utf-8')) + 800  # Base response size + headers
+                
+                # Add as many channels as fit within UDP limit
+                for channel_item in catalog_xml_items[1:]:  # Skip parent device (already added)
+                    item_size = len(channel_item.encode('utf-8'))
+                    if running_size + item_size < 3000:  # Conservative UDP limit
+                        safe_items.append(channel_item)
+                        running_size += item_size
+                    else:
+                        break
+                
+                xml_content = "\n".join(safe_items)
+                actual_count = len(safe_items)
+                channel_count = actual_count - 1  # Subtract parent device
+                log.info(f"[SIP] 📦 Limited proactive notification to parent device + {channel_count} channels (total: {actual_count} items)")
+            else:
+                actual_count = len(catalog_xml_items)
+                channel_count = len(self.device_catalog)
+                log.info(f"[SIP] 📦 Including parent device + all {channel_count} channels in proactive notification (total: {actual_count} items)")
+            
+            # FIXED: Generate catalog response XML in same format as regular responses
+            catalog_xml = f"""<?xml version="1.0" encoding="GB2312"?>
+<Response>
+  <CmdType>Catalog</CmdType>
+  <SN>{proactive_sn}</SN>
+  <DeviceID>{self.device_id}</DeviceID>
+  <Result>OK</Result>
+  <SumNum>{actual_count}</SumNum>
+  <DeviceList Num="{actual_count}">
+{xml_content}
   </DeviceList>
 </Response>"""
             
             # Send the proactive catalog notification via UDP MESSAGE
-            log.info(f"[SIP] 📤 Sending proactive catalog notification with {len(self.device_catalog)} channels (SN: {proactive_sn})")
+            log.info(f"[SIP] 📤 Sending WVP-compatible proactive catalog with parent device + {actual_count-1} channels (SN: {proactive_sn})")
+            
+            # Final size check
+            final_size = len(catalog_xml.encode('utf-8'))
+            log.info(f"[SIP] 📊 Final proactive notification size: {final_size} bytes")
             
             # Save the notification for debugging (FIXED: use numeric SN for filename)
             with open(f"proactive_catalog_{proactive_sn}.xml", "w") as f:
@@ -2635,7 +2685,7 @@ Content-Length: {len(xml_content)}
             # Send via file-based method for reliability (FIXED: pass numeric SN)
             self._send_via_file_method(catalog_xml, str(proactive_sn))
             
-            log.info("[SIP] ✅ Proactive catalog notification sent successfully - frontend should show devices immediately")
+            log.info("[SIP] ✅ WVP-compatible proactive catalog notification sent - frontend should show parent device + channels immediately")
             
         except Exception as e:
             log.error(f"[SIP] ❌ Error sending proactive catalog notification: {e}")
@@ -2722,3 +2772,6 @@ Content-Length: {len(xml_content)}
             log.error(f"[SIP] ❌ Debug catalog generation failed: {e}")
             import traceback
             log.error(f"[SIP] Traceback: {traceback.format_exc()}")
+
+            log.error(f"[SIP] ❌ XML parsing failed: {e}")
+            log.error(f"[SIP] Invalid XML generated - this is the problem!")
