@@ -51,6 +51,7 @@ class RecordingManager:
         """Asynchronous recording scan that doesn't block the main thread"""
         try:
             self.scanning = True
+            log.info("[REC-MANAGER] Starting async scan with CPU throttling for better SIP performance")
             self.scan_recordings(force=True)
         finally:
             self.scanning = False
@@ -63,7 +64,7 @@ class RecordingManager:
         if not force and current_time - self.last_scan_time < self.scan_interval:
             return
             
-        log.info("[REC-MANAGER] Scanning recordings directory")
+        log.info("[REC-MANAGER] Scanning recordings directory with CPU throttling")
         self.last_scan_time = current_time
         
         # Clear the cache if rescanning
@@ -73,6 +74,8 @@ class RecordingManager:
         file_count = 0
         processed_count = 0
         skipped_count = 0
+        batch_size = 5  # Process files in small batches
+        batch_count = 0
             
         # Walk through the recordings directory
         for root, dirs, files in os.walk(self.recordings_directory):
@@ -100,6 +103,16 @@ class RecordingManager:
                 if metadata:
                     self.metadata_cache[file_path] = metadata
                     processed_count += 1
+                
+                # CPU throttling: sleep briefly every few files to not overwhelm the system
+                batch_count += 1
+                if batch_count >= batch_size:
+                    batch_count = 0
+                    time.sleep(0.01)  # 10ms pause every 5 files to reduce CPU load
+                    
+                    # Check if we should yield more time for high file counts
+                    if file_count % 50 == 0:
+                        time.sleep(0.1)  # 100ms pause every 50 files for better system responsiveness
         
         log.info(f"[REC-MANAGER] Scan complete: {len(self.metadata_cache)} total files, {processed_count} processed, {skipped_count} skipped")
     

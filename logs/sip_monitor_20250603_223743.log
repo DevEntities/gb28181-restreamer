@@ -1,0 +1,8 @@
+[2025-06-03 22:37:46] [INFO] [LIVE-MON] 🔴 Starting live SIP message flow monitoring...
+[2025-06-03 22:37:46] [INFO] [LIVE-MON] Starting packet capture: tcpdump -i any -n -A -s 1500 -l (host ai-sip.x-stage.bull-b.com and port 5060) or (port 5080)
+[2025-06-03 22:37:46] [INFO] [LIVE-MON] ✅ Packet capture started successfully
+[2025-06-03 22:37:46] [INFO] [LIVE-MON] 📊 Message processor started
+[2025-06-03 22:37:46] [INFO] [LIVE-MON] ⏱️ Timing analyzer started
+[2025-06-03 22:37:46] [INFO] [LIVE-MON] ✅ Live monitoring started successfully
+[2025-06-03 22:37:46] [INFO] [LIVE-MON] Live monitoring active. Press Ctrl+C to stop...
+[2025-06-03 22:37:46] [INFO] [LIVE-MON] 📊 Live reporter started

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="GB2312"?>
+<Response>
+  <CmdType>Catalog</CmdType>
+  <SN>222227</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+  <Result>OK</Result>
+  <SumNum>2</SumNum>
+  <DeviceList Num="2">
+    <Item>
+      <DeviceID>81000000465001000001</DeviceID>
+      <Name>GB28181-Restreamer</Name>
+      <Manufacturer>GB28181-RestreamerProject</Manufacturer>
+      <Model>Restreamer-1.0</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream Server</Address>
+      <Parental>1</Parental>
+      <ParentID>8100000046000000</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>81000000465013100001</DeviceID>
+      <Name>Test Camera Channel</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>Virtual Camera</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+  </DeviceList>
+</Response>

@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="GB2312"?>
+<Response>
+  <CmdType>Catalog</CmdType>
+  <SN>331561</SN>
+  <DeviceID>81000000465001000001</DeviceID>
+  <Result>OK</Result>
+  <SumNum>21</SumNum>
+  <DeviceList Num="21">
+    <Item>
+      <DeviceID>81000000465001000001</DeviceID>
+      <Name>GB28181-Restreamer</Name>
+      <Manufacturer>GB28181-RestreamerProject</Manufacturer>
+      <Model>Restreamer-1.0</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream Server</Address>
+      <Parental>1</Parental>
+      <ParentID>8100000046000000</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000001</DeviceID>
+      <Name>00-10-10</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000002</DeviceID>
+      <Name>14-32-14</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000003</DeviceID>
+      <Name>12-30-00</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000004</DeviceID>
+      <Name>01-20-30</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000005</DeviceID>
+      <Name>filename_1268</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000006</DeviceID>
+      <Name>filename_963</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000007</DeviceID>
+      <Name>filename_1163</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000008</DeviceID>
+      <Name>filename_54</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000009</DeviceID>
+      <Name>filename_256</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000010</DeviceID>
+      <Name>filename_778</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000011</DeviceID>
+      <Name>filename_157</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000012</DeviceID>
+      <Name>filename_1869</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000013</DeviceID>
+      <Name>filename_169</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000014</DeviceID>
+      <Name>filename_1985</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000015</DeviceID>
+      <Name>filename_101</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000016</DeviceID>
+      <Name>filename_405</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000017</DeviceID>
+      <Name>filename_63</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000018</DeviceID>
+      <Name>filename_111</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000019</DeviceID>
+      <Name>filename_170</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+    <Item>
+      <DeviceID>810000004650131000020</DeviceID>
+      <Name>filename_524</Name>
+      <Manufacturer>GB28181-Restreamer</Manufacturer>
+      <Model>File Stream</Model>
+      <Owner>gb28181-restreamer</Owner>
+      <CivilCode>810000</CivilCode>
+      <Block>81000000</Block>
+      <Address>Local Stream</Address>
+      <Parental>0</Parental>
+      <ParentID>81000000465001000001</ParentID>
+      <SafetyWay>0</SafetyWay>
+      <RegisterWay>1</RegisterWay>
+      <Secrecy>0</Secrecy>
+      <IPAddress></IPAddress>
+      <Port>0</Port>
+      <Password></Password>
+      <Status>ON</Status>
+      <Longitude>116.307629</Longitude>
+      <Latitude>39.984094</Latitude>
+    </Item>
+  </DeviceList>
+</Response>

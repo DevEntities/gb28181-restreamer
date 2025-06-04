@@ -298,11 +298,35 @@ def main():
 
         log.info("[CONFIG] Loaded configuration successfully.")
 
-        # Scan for video files
-        video_files = scan_video_files(config["stream_directory"])
-        log.info(f"[CATALOG] {len(video_files)} video files found.")
-        for video in video_files:
-            log.info(f"  • {video}")
+        # QUICK SCAN: Just get a small sample of video files for immediate catalog generation
+        log.info("[CATALOG] Performing quick video scan (full scan will happen in background)...")
+        try:
+            sample_videos = []
+            # Get just the first few video files from each directory for immediate use
+            for root, dirs, files in os.walk(config["stream_directory"]):
+                dirs[:] = [d for d in dirs if not d.startswith('.')]  # Skip hidden dirs
+                video_count = 0
+                for file in files:
+                    if file.lower().endswith(('.mp4', '.avi', '.mkv', '.mov', '.flv', '.wmv', '.ts', '.m4v')):
+                        sample_videos.append(os.path.join(root, file))
+                        video_count += 1
+                        if video_count >= 5:  # Only take first 5 videos per directory
+                            break
+                if len(sample_videos) >= 20:  # Limit total sample to 20 videos
+                    break
+            
+            log.info(f"[CATALOG] Quick scan found {len(sample_videos)} sample video files")
+            for video in sample_videos[:5]:  # Log first 5
+                log.info(f"  • {os.path.basename(video)}")
+            if len(sample_videos) > 5:
+                log.info(f"  ... and {len(sample_videos) - 5} more videos")
+                
+            # Set this as temporary catalog for immediate use
+            config["sample_videos"] = sample_videos
+            
+        except Exception as e:
+            log.error(f"[CATALOG] Quick scan failed: {e}")
+            config["sample_videos"] = []
 
         # Create shared media streamer instance with processing capabilities
         log.info("[STREAM] Initializing media streamer with frame processing support")
@@ -323,17 +347,6 @@ def main():
         streamer = MediaStreamer(config)
         # Start GLib main loop for GStreamer event handling
         streamer.start_glib_loop()
-        
-        # Initialize recording manager
-        recording_manager = get_recording_manager(config)
-        if recording_manager:
-            # Start async scan for recordings (don't wait for completion)
-            log.info("[RECORD] Recording manager initialized with async scanning")
-            # Log scan status
-            status = recording_manager.get_scan_status()
-            log.info(f"[RECORD] Scan status: {status['files_cached']} files cached, scanning={status['scanning']}")
-        else:
-            log.warning("[RECORD] Recording manager not available")
         
         # Start RTSP sources
         run_rtsp_sources(config.get("rtsp_sources", []))
@@ -370,7 +383,8 @@ def main():
         streamer.register_frame_processor("text", process_add_text)
         log.info("[STREAM] Registered frame processors for video manipulation")
 
-        # Start SIP client with improved error handling and streamer connection
+        # PRIORITY: Start SIP client first to get online quickly
+        log.info("[SIP] Starting SIP client with priority (recording scan will happen in background)...")
         config["streamer"] = streamer  # Pass streamer instance to SIP client
         sip_client = SIPClient(config)
         
@@ -380,19 +394,43 @@ def main():
             local_sip_server = LocalSIPServer(config, sip_client)
             local_sip_server.start()
         
+        # Start SIP client in a separate thread to avoid blocking
+        sip_thread = threading.Thread(target=sip_client.start, daemon=True)
+        sip_thread.start()
+        log.info("[SIP] SIP client started in background thread")
+        
+        # Give SIP client a moment to start registering
+        time.sleep(2)
+        
+        # NOW start recording manager after SIP is initializing (this is the expensive operation)
+        log.info("[RECORD] Starting recording manager (this will scan files in background)...")
+        recording_manager = get_recording_manager(config)
+        if recording_manager:
+            # The recording manager will scan asynchronously in its own thread
+            log.info("[RECORD] Recording manager initialized with async scanning")
+            # Log initial scan status
+            status = recording_manager.get_scan_status()
+            log.info(f"[RECORD] Initial scan status: {status['files_cached']} files cached, scanning={status['scanning']}")
+        else:
+            log.warning("[RECORD] Recording manager not available")
+        
         # Start status monitoring thread
         status_thread = threading.Thread(target=periodic_status_check, daemon=True)
         status_thread.start()
         
         try:
-            log.info("[SIP] Starting SIP client...")
-            sip_client.start()
+            # Wait for SIP client thread and monitor its health
+            log.info("[MAIN] Monitoring SIP client health...")
             
             # Keep main thread alive with healthchecks
             while running:
                 time.sleep(60)  # Check every minute instead of 30 seconds
                 
-                # DISABLED: Automatic restart logic that was causing connection loops
+                # Check if SIP thread is still alive
+                if not sip_thread.is_alive():
+                    log.warning("[MAIN] SIP client thread has ended")
+                    break
+                
                 # Check if SIP client is still running
                 if not sip_client or not hasattr(sip_client, 'process') or sip_client.process is None:
                     log.warning("[MAIN] SIP client appears to have stopped")
