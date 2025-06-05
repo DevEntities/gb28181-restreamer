@@ -674,16 +674,6 @@ class SIPClient:
                 sn = sn_match.group(1)
                 log.info(f"✅ Valid catalog query confirmed (SN: {sn}), processing...")
                 
-                # FIXED: Thread-safe duplicate query detection
-                if sn in self._pending_catalog_queries:
-                    pending_time = self._pending_catalog_queries[sn]
-                    if time.time() - pending_time < 5:  # 5-second duplicate window
-                        log.warning(f"[SIP] 🔄 Duplicate catalog query detected (SN: {sn}), ignoring")
-                        return None
-                
-                # Mark query as pending
-                self._pending_catalog_queries[sn] = time.time()
-                
                 # FIXED: Thread-safe rate limiting for catalog responses
                 with self._catalog_lock:
                     current_time = time.time()
@@ -2451,7 +2441,7 @@ Content-Length: {len(xml_content)}
             
             log.info(f"[SIP] 💓 Sending WVP-compatible keepalive (SN: {sn}) to prevent heartbeat timeout")
             
-            # FIXED: Send kkeepalive via dedicated UDP socket, not catalog response method
+            # FIXED: Send keepalive via dedicated UDP socket, not catalog response method
             success = self._send_keepalive_message(keepalive_xml, sn)
             
             if success:
