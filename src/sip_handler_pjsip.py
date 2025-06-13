@@ -3162,7 +3162,8 @@ Content-Length: {len(xml_content)}
             if hasattr(self, 'config') and 'rtsp_sources' in self.config:
                 for source in self.config['rtsp_sources']:
                     if source.get('channel_id') == channel_id:
-                        video_path = source.get('rtsp_url')
+                        # Accept both 'url' and legacy 'rtsp_url' keys
+                        video_path = source.get('url') or source.get('rtsp_url')
                         log.info(f"[SIP] Using RTSP source for channel {channel_id}: {video_path}")
                         break
             
